@@ -1,0 +1,28 @@
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Orbitron-Light'), local('Orbitron-Regular'), url(https://fonts.gstatic.com/s/orbitron/v7/94ug0rEgQO_WuI_xKJMFc3YhjbSpvc47ee6xR_80Hnw.woff) format('woff');
+}
+
+
+
+
+body {
+  margin: 2em;
+  font-family: "Orbitron";
+}
+
+#graph {
+  margin-top: 1.5em;
+}
+
+#description {
+  margin-top: 1em;
+  
+}
+
+button {border-width:6px;font-family: "Orbitron";} /* Border width */
+
+
+

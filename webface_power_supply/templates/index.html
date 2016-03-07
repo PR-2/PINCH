@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="static/css/style.css" rel="stylesheet">
+    <script type="text/javascript" src="static/jquery-1.6.1.min.js"></script>
+    <script type="text/javascript" src="static/jquery.flot.js"></script>
+    <script type="text/javascript" src="static/socket.io.js"></script>
+ <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="static/excanvas.js"></script><![endif   ]-->
+      <!-- My own scripts -->
+      <script type="text/javascript" src="static/connection_socket_button.js"> </script>
+     <script type="text/javascript" src="static/connection_socket_get_data.js"> </script>
+  </head>
+
+<body>
+  <p style="display:inline" id="value">Идет управление с другого устройства! </p>
+  <br>
+  <iframe src="/gauge"  width="200" height="100"  ></iframe>
+  <br><br><br><br>
+<div id="main">
+    <div id="messages">
+     <p id="lines"> </p>
+     <p  style="display:inline" id="datagram"> </p>
+    </div>
+    <table>
+ <td>
+     {% for name in command_list.split() %}
+     <form id={{"Send_"+name}}>
+      <input id={{name}}>
+      <button id='button' >{{name}}</button>
+    </form>
+    <br>
+     {% endfor %}
+ </td>
+ <td>
+     {% for name in indicator_list.split() %}
+     <p id = {{ name }} > {{ name }} = </p>
+     {% endfor %}
+    </td>
+ </table>
+    {% for name in coil_list.split() %}
+    <button id={{ name }} >{{ name }}</button>
+    {% endfor %}
+  </div>
+</body>
+</html>

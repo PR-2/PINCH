@@ -1,0 +1,472 @@
+2016-01-22 18:13:17 button Coil_StTimerOFF pressed
+2016-01-22 18:14:17 button Coil_StTimerOFF pressed
+2016-01-22 18:14:18 button Coil_RstTimer pressed
+2016-01-22 18:17:59 button Coil_StTimerON pressed
+2016-01-22 18:17:59 button Coil_StTimerOFF pressed
+2016-01-22 18:30:56 button Coil_StTimerON pressed
+2016-01-22 18:30:57 button Coil_StTimerOFF pressed
+2016-01-22 18:30:58 button Coil_RstTimer pressed
+2016-01-22 18:30:59 button Coil_StTimerOFF pressed
+2016-01-22 18:31:51 button Coil_StTimerOFF pressed
+2016-01-22 18:31:53 button Coil_RstTimer pressed
+2016-01-22 18:31:54 button Coil_IgnOn pressed
+2016-01-22 18:31:55 button Coil_IgnOff pressed
+2016-01-22 18:31:56 button Coil_OutSwitch_A pressed
+2016-01-22 18:31:56 button Coil_IgnOn pressed
+2016-01-22 18:31:57 button Coil_StTimerOFF pressed
+2016-01-22 18:32:22 button Coil_RstTimer pressed
+2016-01-22 18:32:37 button Coil_StTimerOFF pressed
+2016-01-22 18:33:47 button Coil_StTimerOFF pressed
+2016-01-22 18:33:50 button Coil_RstTimer pressed
+2016-01-22 18:33:51 button Coil_StTimerOFF pressed
+2016-01-22 18:34:53 button Coil_RstTimer pressed
+2016-01-22 18:34:55 button Coil_StTimerOFF pressed
+2016-01-22 18:34:56 button Coil_StTimerOFF pressed
+2016-01-22 18:36:25 button Coil_StTimerOFF pressed
+2016-01-22 18:36:28 button Coil_RstTimer pressed
+2016-01-22 18:36:29 button Coil_IgnOn pressed
+2016-01-22 18:36:30 button Coil_IgnOff pressed
+2016-01-22 20:08:39 button Coil_OFF pressed
+2016-01-22 20:08:39 button Coil_StTimerON pressed
+2016-01-22 20:08:40 button Coil_StTimerOFF pressed
+2016-01-22 20:08:41 button Coil_RstTimer pressed
+2016-01-22 20:08:42 button Coil_IgnOn pressed
+2016-01-22 20:10:14 button Coil_OFF pressed
+2016-01-22 20:23:32 button Coil_StTimerOFF pressed
+2016-01-22 20:24:04 button Coil_StTimerOFF pressed
+2016-01-22 20:24:06 button Coil_RstTimer pressed
+2016-01-22 20:24:07 button Coil_IgnOn pressed
+2016-01-22 20:24:10 button Coil_RstTimer pressed
+2016-01-22 20:24:10 button Coil_StTimerOFF pressed
+2016-01-22 20:26:37 button Coil_StTimerON pressed
+2016-01-22 20:26:37 button Coil_StTimerOFF pressed
+2016-01-22 20:26:38 button Coil_RstTimer pressed
+2016-01-22 20:27:00 button Coil_IgnOn pressed
+2016-01-22 20:27:02 button Coil_IgnOff pressed
+2016-01-22 20:27:05 button Coil_IgnOn pressed
+2016-01-22 20:27:06 button Coil_IgnOff pressed
+2016-01-22 20:33:11 button Coil_StTimerON pressed
+2016-01-22 20:33:13 button Coil_RstTimer pressed
+2016-01-22 20:36:00 button Coil_StTimerON pressed
+2016-01-22 20:36:00 button Coil_StTimerOFF pressed
+2016-01-22 20:36:08 button Coil_StTimerOFF pressed
+2016-01-22 20:36:15 button 23 HReg_Voltage pressed
+2016-01-22 20:36:16 button Coil_StTimerON pressed
+2016-01-22 20:36:18 button  HReg_RemCtrl pressed
+2016-01-22 20:36:20 button 232 HReg_Sec pressed
+2016-01-22 20:36:21 button Coil_RstTimer pressed
+2016-01-22 20:36:22 button Coil_IgnOff pressed
+2016-01-22 20:36:22 button Coil_IgnOn pressed
+2016-01-22 20:36:23 button Coil_OutSwitch_A pressed
+2016-01-22 20:36:25 button 232 HReg_Freq pressed
+2016-01-22 20:41:22 button qw HReg_Power pressed
+2016-01-22 20:41:24 button 12 HReg_Mode pressed
+2016-01-22 20:41:26 button Coil_StTimerON pressed
+2016-01-22 20:41:26 button Coil_StTimerOFF pressed
+2016-01-22 20:41:27 button Coil_RstTimer pressed
+2016-01-22 20:42:27 button Coil_StTimerON pressed
+2016-01-22 20:47:32 button Coil_StTimerOFF pressed
+2016-01-22 20:47:33 button Coil_RstTimer pressed
+2016-01-22 20:47:42 button 32 HReg_Power pressed
+2016-01-22 20:47:56 button Coil_StTimerOFF pressed
+2016-01-22 20:57:44 button 12 HReg_Mode pressed
+2016-01-22 21:14:04 button  HReg_Freq pressed
+2016-01-22 21:14:06 button Coil_StTimerOFF pressed
+2016-01-22 21:14:06 button Coil_RstTimer pressed
+2016-01-22 21:14:07 button Coil_IgnOn pressed
+2016-01-22 21:14:07 button Coil_IgnOff pressed
+2016-01-22 21:14:08 button Coil_OFF pressed
+2016-01-22 21:14:09 button Coil_StTimerON pressed
+2016-01-22 21:14:15 button 67 HReg_Voltage pressed
+2016-01-22 21:14:17 button Coil_StTimerON pressed
+2016-01-22 21:14:29 button  HReg_DCyo pressed
+2016-01-22 21:14:33 button 32 HReg_Power pressed
+2016-01-22 21:14:33 button 12 HReg_Mode pressed
+2016-01-22 21:14:49 button  HReg_DCyo pressed
+2016-01-22 21:14:51 button Coil_StTimerOFF pressed
+2016-01-22 21:14:52 button Coil_RstTimer pressed
+2016-01-22 21:14:52 button Coil_IgnOn pressed
+2016-01-22 21:14:53 button Coil_OutSwitch_A pressed
+2016-01-22 21:14:54 button Coil_OutSwitch_B pressed
+2016-01-22 21:14:54 button Coil_OutSwitch_A pressed
+2016-01-22 21:14:55 button Coil_IgnOff pressed
+2016-01-22 21:14:55 button Coil_StTimerOFF pressed
+2016-01-22 21:14:56 button Coil_StTimerON pressed
+2016-01-25 14:33:13 button  HReg_StabMode pressed
+2016-01-25 14:33:14 button Coil_StTimerON pressed
+2016-01-25 14:33:15 button Coil_StTimerOFF pressed
+2016-01-25 14:33:16 button Coil_RstTimer pressed
+2016-01-25 14:41:33 button Coil_StTimerOFF pressed
+2016-01-25 14:42:32 button  HReg_Voltage pressed
+2016-01-25 14:42:33 button  HReg_Current pressed
+2016-01-25 14:42:35 button Coil_RstTimer pressed
+2016-01-25 14:42:35 button Coil_StTimerOFF pressed
+2016-01-25 14:44:02 button Coil_StTimerOFF pressed
+2016-01-25 14:44:04 button Coil_IgnOn pressed
+2016-01-25 14:44:06 button 2 HReg_DCyo pressed
+2016-01-25 14:47:58 button  HReg_Voltage pressed
+2016-01-25 14:48:01 button  HReg_Power pressed
+2016-01-25 14:48:03 button Coil_StTimerOFF pressed
+2016-01-25 14:48:03 button Coil_RstTimer pressed
+2016-01-25 14:49:11 button  HReg_StabMode pressed
+2016-01-25 14:49:15 button Coil_StTimerOFF pressed
+2016-01-25 14:49:15 button Coil_RstTimer pressed
+2016-01-25 14:51:45 button  HReg_Current pressed
+2016-01-25 14:53:49 button  HReg_Current pressed
+2016-01-25 14:53:50 button  HReg_Power pressed
+2016-01-25 14:53:52 button Coil_StTimerOFF pressed
+2016-01-25 14:53:52 button Coil_RstTimer pressed
+2016-01-25 14:55:28 button reading from server pressed
+2016-01-25 14:55:28 button reading from server pressed
+2016-01-25 14:55:28 button reading from server pressed
+2016-01-25 14:55:28 button reading from server pressed
+2016-01-25 14:55:28 button reading from server pressed
+2016-01-25 14:55:29 button reading from server pressed
+2016-01-25 14:55:49 button reading from server pressed
+2016-01-25 14:55:51 button reading from server pressed
+2016-01-25 14:56:59 button reading from server pressed
+2016-01-25 14:56:59 button reading from server pressed
+2016-01-25 14:56:59 button reading from server pressed
+2016-01-25 14:56:59 button reading from server pressed
+2016-01-25 14:57:00 button reading from server pressed
+2016-01-25 14:57:00 button reading from server pressed
+2016-01-25 14:57:00 button reading from server pressed
+2016-01-25 14:57:00 button reading from server pressed
+2016-01-25 14:57:00 button reading from server pressed
+2016-01-25 14:57:00 button reading from server pressed
+2016-01-25 14:57:00 button reading from server pressed
+2016-01-25 14:57:00 button reading from server pressed
+2016-01-25 14:57:00 button reading from server pressed
+2016-01-25 14:57:00 button reading from server pressed
+2016-01-25 14:57:01 button reading from server pressed
+2016-01-25 14:57:01 button reading from server pressed
+2016-01-25 14:57:01 button reading from server pressed
+2016-01-25 14:57:01 button reading from server pressed
+2016-01-25 14:57:01 button reading from server pressed
+2016-01-25 14:57:01 button reading from server pressed
+2016-01-25 14:57:01 button reading from server pressed
+2016-01-25 14:57:01 button reading from server pressed
+2016-01-25 14:57:01 button reading from server pressed
+2016-01-25 14:57:02 button reading from server pressed
+2016-01-25 14:57:02 button reading from server pressed
+2016-01-25 14:57:02 button reading from server pressed
+2016-01-25 14:57:02 button reading from server pressed
+2016-01-25 14:57:02 button reading from server pressed
+2016-01-25 14:57:02 button reading from server pressed
+2016-01-25 14:57:02 button reading from server pressed
+2016-01-25 14:57:02 button reading from server pressed
+2016-01-25 14:57:02 button reading from server pressed
+2016-01-25 14:57:02 button reading from server pressed
+2016-01-25 14:57:03 button reading from server pressed
+2016-01-25 14:57:03 button reading from server pressed
+2016-01-25 14:57:03 button reading from server pressed
+2016-01-25 14:57:03 button reading from server pressed
+2016-01-25 14:57:03 button reading from server pressed
+2016-01-25 14:57:03 button reading from server pressed
+2016-01-25 14:57:03 button reading from server pressed
+2016-01-25 14:57:03 button reading from server pressed
+2016-01-25 14:57:03 button reading from server pressed
+2016-01-25 14:57:04 button reading from server pressed
+2016-01-25 14:57:04 button reading from server pressed
+2016-01-25 14:57:04 button reading from server pressed
+2016-01-25 14:57:04 button reading from server pressed
+2016-01-25 14:57:04 button reading from server pressed
+2016-01-25 14:57:04 button reading from server pressed
+2016-01-25 14:57:04 button reading from server pressed
+2016-01-25 14:57:04 button reading from server pressed
+2016-01-25 14:57:04 button reading from server pressed
+2016-01-25 14:57:04 button reading from server pressed
+2016-01-25 14:57:05 button reading from server pressed
+2016-01-25 14:57:05 button reading from server pressed
+2016-01-25 14:57:05 button reading from server pressed
+2016-01-25 14:57:05 button reading from server pressed
+2016-01-25 14:57:05 button reading from server pressed
+2016-01-25 14:57:05 button reading from server pressed
+2016-01-25 14:57:05 button reading from server pressed
+2016-01-25 14:57:05 button reading from server pressed
+2016-01-25 14:57:05 button reading from server pressed
+2016-01-25 14:57:06 button reading from server pressed
+2016-01-25 14:57:06 button reading from server pressed
+2016-01-25 14:57:06 button reading from server pressed
+2016-01-25 14:57:06 button reading from server pressed
+2016-01-25 14:57:06 button reading from server pressed
+2016-01-25 14:57:06 button reading from server pressed
+2016-01-25 14:57:06 button reading from server pressed
+2016-01-25 14:57:06 button reading from server pressed
+2016-01-25 14:57:06 button reading from server pressed
+2016-01-25 14:57:06 button reading from server pressed
+2016-01-25 14:57:07 button reading from server pressed
+2016-01-25 14:57:07 button reading from server pressed
+2016-01-25 14:57:07 button reading from server pressed
+2016-01-25 14:57:07 button reading from server pressed
+2016-01-25 14:57:07 button reading from server pressed
+2016-01-25 14:57:07 button reading from server pressed
+2016-01-25 14:57:07 button reading from server pressed
+2016-01-25 14:57:07 button reading from server pressed
+2016-01-25 14:57:07 button reading from server pressed
+2016-01-25 14:57:08 button reading from server pressed
+2016-01-25 14:57:08 button reading from server pressed
+2016-01-25 14:57:08 button reading from server pressed
+2016-01-25 14:57:08 button reading from server pressed
+2016-01-25 14:57:08 button reading from server pressed
+2016-01-25 14:57:08 button reading from server pressed
+2016-01-25 14:57:08 button reading from server pressed
+2016-01-25 14:57:08 button reading from server pressed
+2016-01-25 14:57:08 button reading from server pressed
+2016-01-25 14:57:08 button reading from server pressed
+2016-01-25 14:57:09 button reading from server pressed
+2016-01-25 14:57:09 button reading from server pressed
+2016-01-25 14:57:09 button reading from server pressed
+2016-01-25 14:57:09 button reading from server pressed
+2016-01-25 14:57:09 button reading from server pressed
+2016-01-25 14:57:09 button reading from server pressed
+2016-01-25 14:57:09 button reading from server pressed
+2016-01-25 14:57:09 button reading from server pressed
+2016-01-25 14:57:09 button reading from server pressed
+2016-01-25 14:57:10 button reading from server pressed
+2016-01-25 14:57:10 button reading from server pressed
+2016-01-25 14:57:10 button reading from server pressed
+2016-01-25 14:57:10 button reading from server pressed
+2016-01-25 14:57:10 button reading from server pressed
+2016-01-25 14:57:10 button reading from server pressed
+2016-01-25 14:57:10 button reading from server pressed
+2016-01-25 14:57:10 button reading from server pressed
+2016-01-25 14:57:10 button reading from server pressed
+2016-01-25 14:57:10 button reading from server pressed
+2016-01-25 14:57:11 button reading from server pressed
+2016-01-25 14:57:11 button reading from server pressed
+2016-01-25 14:57:11 button reading from server pressed
+2016-01-25 14:57:11 button reading from server pressed
+2016-01-25 14:57:11 button reading from server pressed
+2016-01-25 14:57:11 button reading from server pressed
+2016-01-25 14:57:11 button reading from server pressed
+2016-01-25 14:57:11 button reading from server pressed
+2016-01-25 14:57:11 button reading from server pressed
+2016-01-25 14:57:12 button reading from server pressed
+2016-01-25 14:57:12 button reading from server pressed
+2016-01-25 14:57:12 button reading from server pressed
+2016-01-25 14:57:12 button reading from server pressed
+2016-01-25 14:57:12 button reading from server pressed
+2016-01-25 14:57:12 button  HReg_StabMode pressed
+2016-01-25 14:57:12 button reading from server pressed
+2016-01-25 14:57:12 button reading from server pressed
+2016-01-25 14:57:12 button reading from server pressed
+2016-01-25 14:57:12 button reading from server pressed
+2016-01-25 14:57:12 button reading from server pressed
+2016-01-25 14:57:13 button reading from server pressed
+2016-01-25 14:57:13 button reading from server pressed
+2016-01-25 14:57:13 button reading from server pressed
+2016-01-25 14:57:13 button  HReg_Voltage pressed
+2016-01-25 14:57:13 button reading from server pressed
+2016-01-25 14:57:13 button reading from server pressed
+2016-01-25 14:57:13 button reading from server pressed
+2016-01-25 14:57:13 button reading from server pressed
+2016-01-25 14:57:13 button reading from server pressed
+2016-01-25 14:57:13 button reading from server pressed
+2016-01-25 14:57:14 button reading from server pressed
+2016-01-25 14:57:14 button reading from server pressed
+2016-01-25 14:57:14 button reading from server pressed
+2016-01-25 14:57:14 button reading from server pressed
+2016-01-25 14:57:14 button reading from server pressed
+2016-01-25 14:57:14 button reading from server pressed
+2016-01-25 14:57:14 button reading from server pressed
+2016-01-25 14:57:14 button reading from server pressed
+2016-01-25 14:57:14 button reading from server pressed
+2016-01-25 14:57:15 button reading from server pressed
+2016-01-25 14:57:15 button reading from server pressed
+2016-01-25 14:57:15 button reading from server pressed
+2016-01-25 14:57:15 button reading from server pressed
+2016-01-25 14:57:15 button reading from server pressed
+2016-01-25 14:57:15 button reading from server pressed
+2016-01-25 14:57:15 button reading from server pressed
+2016-01-25 14:57:15 button reading from server pressed
+2016-01-25 14:57:15 button reading from server pressed
+2016-01-25 14:57:15 button reading from server pressed
+2016-01-25 14:57:16 button reading from server pressed
+2016-01-25 14:57:16 button reading from server pressed
+2016-01-25 14:57:16 button reading from server pressed
+2016-01-25 14:57:16 button reading from server pressed
+2016-01-25 14:57:16 button reading from server pressed
+2016-01-25 14:57:16 button reading from server pressed
+2016-01-25 14:57:16 button reading from server pressed
+2016-01-25 14:57:16 button reading from server pressed
+2016-01-25 14:57:16 button reading from server pressed
+2016-01-25 14:57:17 button reading from server pressed
+2016-01-25 14:57:57 button reading from server pressed
+2016-01-25 14:58:07 button reading from server pressed
+2016-01-25 14:58:17 button reading from server pressed
+2016-01-25 14:58:27 button reading from server pressed
+2016-01-25 14:58:37 button reading from server pressed
+2016-01-25 14:58:44 button reading from server pressed
+2016-01-25 14:58:54 button reading from server pressed
+2016-01-25 14:59:04 button reading from server pressed
+2016-01-25 14:59:10 button reading from server pressed
+2016-01-25 14:59:20 button reading from server pressed
+2016-01-25 14:59:30 button reading from server pressed
+2016-01-25 14:59:40 button reading from server pressed
+2016-01-25 14:59:56 button reading from server 2016-01-25 14:59:56 pressed
+2016-01-25 15:00:00 button  HReg_Voltage pressed
+2016-01-25 15:00:06 button reading from server 2016-01-25 15:00:06 pressed
+2016-01-25 15:00:16 button reading from server 2016-01-25 15:00:16 pressed
+2016-01-25 15:00:26 button reading from server 2016-01-25 15:00:26 pressed
+2016-01-25 15:00:36 button reading from server 2016-01-25 15:00:36 pressed
+2016-01-25 15:00:56 button reading from server 2016-01-25 15:00:56 pressed
+2016-01-25 15:00:56 button reading from server 2016-01-25 15:00:56 pressed
+2016-01-25 15:00:57 button reading from server 2016-01-25 15:00:57 pressed
+2016-01-25 15:00:57 button reading from server 2016-01-25 15:00:57 pressed
+2016-01-25 15:00:58 button reading from server 2016-01-25 15:00:58 pressed
+2016-01-25 15:00:59 button reading from server 2016-01-25 15:00:59 pressed
+2016-01-25 15:00:59 button reading from server 2016-01-25 15:00:59 pressed
+2016-01-25 15:01:00 button reading from server 2016-01-25 15:01:00 pressed
+2016-01-25 15:01:00 button reading from server 2016-01-25 15:01:00 pressed
+2016-01-25 15:01:01 button reading from server 2016-01-25 15:01:01 pressed
+2016-01-25 15:01:01 button  HReg_Current pressed
+2016-01-25 15:01:01 button reading from server 2016-01-25 15:01:01 pressed
+2016-01-25 15:01:02 button reading from server 2016-01-25 15:01:02 pressed
+2016-01-25 15:01:02 button reading from server 2016-01-25 15:01:02 pressed
+2016-01-25 15:01:03 button reading from server 2016-01-25 15:01:03 pressed
+2016-01-25 15:01:03 button reading from server 2016-01-25 15:01:03 pressed
+2016-01-25 15:01:04 button reading from server 2016-01-25 15:01:04 pressed
+2016-01-25 15:01:04 button reading from server 2016-01-25 15:01:04 pressed
+2016-01-25 15:01:05 button reading from server 2016-01-25 15:01:05 pressed
+2016-01-25 15:01:05 button reading from server 2016-01-25 15:01:05 pressed
+2016-01-25 15:01:06 button reading from server 2016-01-25 15:01:06 pressed
+2016-01-25 15:01:06 button reading from server 2016-01-25 15:01:06 pressed
+2016-01-25 15:01:07 button reading from server 2016-01-25 15:01:07 pressed
+2016-01-25 15:01:07 button reading from server 2016-01-25 15:01:07 pressed
+2016-01-25 15:01:08 button reading from server 2016-01-25 15:01:08 pressed
+2016-01-25 15:01:08 button reading from server 2016-01-25 15:01:08 pressed
+2016-01-25 15:01:09 button reading from server 2016-01-25 15:01:09 pressed
+2016-01-25 15:01:09 button Coil_RstTimer pressed
+2016-01-25 15:01:09 button reading from server 2016-01-25 15:01:09 pressed
+2016-01-25 15:01:10 button reading from server 2016-01-25 15:01:10 pressed
+2016-01-25 15:01:10 button reading from server 2016-01-25 15:01:10 pressed
+2016-01-25 15:01:11 button reading from server 2016-01-25 15:01:11 pressed
+2016-01-25 15:01:11 button reading from server 2016-01-25 15:01:11 pressed
+2016-01-25 15:01:12 button reading from server 2016-01-25 15:01:12 pressed
+2016-01-25 15:01:12 button reading from server 2016-01-25 15:01:12 pressed
+2016-01-25 15:01:13 button reading from server 2016-01-25 15:01:13 pressed
+2016-01-25 15:01:13 button reading from server 2016-01-25 15:01:13 pressed
+2016-01-25 15:01:14 button reading from server 2016-01-25 15:01:14 pressed
+2016-01-25 15:01:14 button reading from server 2016-01-25 15:01:14 pressed
+2016-01-25 15:01:15 button reading from server 2016-01-25 15:01:15 pressed
+2016-01-25 15:01:15 button reading from server 2016-01-25 15:01:15 pressed
+2016-01-25 15:01:16 button reading from server 2016-01-25 15:01:16 pressed
+2016-01-25 15:01:16 button reading from server 2016-01-25 15:01:16 pressed
+2016-01-25 15:01:17 button reading from server 2016-01-25 15:01:17 pressed
+2016-01-25 15:01:17 button reading from server 2016-01-25 15:01:17 pressed
+2016-01-25 15:01:18 button reading from server 2016-01-25 15:01:18 pressed
+2016-01-25 15:01:18 button reading from server 2016-01-25 15:01:18 pressed
+2016-01-25 15:01:19 button reading from server 2016-01-25 15:01:19 pressed
+2016-01-25 15:01:19 button reading from server 2016-01-25 15:01:19 pressed
+2016-01-25 15:01:20 button reading from server 2016-01-25 15:01:20 pressed
+2016-01-25 15:01:20 button reading from server 2016-01-25 15:01:20 pressed
+2016-01-25 15:01:21 button reading from server 2016-01-25 15:01:21 pressed
+2016-01-25 15:01:21 button reading from server 2016-01-25 15:01:21 pressed
+2016-01-25 15:01:22 button reading from server 2016-01-25 15:01:22 pressed
+2016-01-25 15:01:22 button reading from server 2016-01-25 15:01:22 pressed
+2016-01-25 15:01:23 button reading from server 2016-01-25 15:01:23 pressed
+2016-01-25 15:01:23 button reading from server 2016-01-25 15:01:23 pressed
+2016-01-25 15:01:24 button reading from server 2016-01-25 15:01:24 pressed
+2016-01-25 15:01:24 button reading from server 2016-01-25 15:01:24 pressed
+2016-01-25 15:01:25 button reading from server 2016-01-25 15:01:25 pressed
+2016-01-25 15:01:25 button reading from server 2016-01-25 15:01:25 pressed
+2016-01-25 15:01:26 button reading from server 2016-01-25 15:01:26 pressed
+2016-01-25 15:01:26 button reading from server 2016-01-25 15:01:26 pressed
+2016-01-25 15:01:27 button reading from server 2016-01-25 15:01:27 pressed
+2016-01-25 15:01:27 button reading from server 2016-01-25 15:01:27 pressed
+2016-01-25 15:01:28 button reading from server 2016-01-25 15:01:28 pressed
+2016-01-25 15:01:28 button reading from server 2016-01-25 15:01:28 pressed
+2016-01-25 15:01:29 button reading from server 2016-01-25 15:01:29 pressed
+2016-01-25 15:01:29 button reading from server 2016-01-25 15:01:29 pressed
+2016-01-25 15:01:30 button reading from server 2016-01-25 15:01:30 pressed
+2016-01-25 15:01:30 button reading from server 2016-01-25 15:01:30 pressed
+2016-01-25 15:01:31 button reading from server 2016-01-25 15:01:31 pressed
+2016-01-25 15:01:31 button reading from server 2016-01-25 15:01:31 pressed
+2016-01-25 15:01:32 button reading from server 2016-01-25 15:01:32 pressed
+2016-01-25 15:01:32 button reading from server 2016-01-25 15:01:32 pressed
+2016-01-25 15:01:33 button reading from server 2016-01-25 15:01:33 pressed
+2016-01-25 15:01:33 button reading from server 2016-01-25 15:01:33 pressed
+2016-01-25 15:01:34 button reading from server 2016-01-25 15:01:34 pressed
+2016-01-25 15:01:34 button reading from server 2016-01-25 15:01:34 pressed
+2016-01-25 15:01:35 button reading from server 2016-01-25 15:01:35 pressed
+2016-01-25 15:01:35 button reading from server 2016-01-25 15:01:35 pressed
+2016-01-25 15:01:36 button reading from server 2016-01-25 15:01:36 pressed
+2016-01-25 15:01:36 button reading from server 2016-01-25 15:01:36 pressed
+2016-01-25 15:01:37 button reading from server 2016-01-25 15:01:37 pressed
+2016-01-25 15:01:37 button reading from server 2016-01-25 15:01:37 pressed
+2016-01-25 15:01:38 button reading from server 2016-01-25 15:01:38 pressed
+2016-01-25 15:01:38 button reading from server 2016-01-25 15:01:38 pressed
+2016-01-25 15:01:39 button reading from server 2016-01-25 15:01:39 pressed
+2016-01-25 15:01:40 button reading from server 2016-01-25 15:01:40 pressed
+2016-01-25 15:01:40 button reading from server 2016-01-25 15:01:40 pressed
+2016-01-25 15:01:41 button reading from server 2016-01-25 15:01:41 pressed
+2016-01-25 15:03:48 button reading from server 2016-01-25 15:03:48 pressed
+2016-01-25 15:03:49 button reading from server 2016-01-25 15:03:49 pressed
+2016-01-25 15:03:50 button reading from server 2016-01-25 15:03:50 pressed
+2016-01-25 15:03:50 button reading from server 2016-01-25 15:03:50 pressed
+2016-01-25 15:03:51 button reading from server 2016-01-25 15:03:51 pressed
+2016-01-25 15:03:51 button  HReg_Voltage pressed
+2016-01-25 15:03:51 button reading from server 2016-01-25 15:03:51 pressed
+2016-01-25 15:03:52 button reading from server 2016-01-25 15:03:52 pressed
+2016-01-25 15:03:52 button  HReg_Current pressed
+2016-01-25 15:03:52 button reading from server 2016-01-25 15:03:52 pressed
+2016-01-25 15:03:53 button reading from server 2016-01-25 15:03:53 pressed
+2016-01-25 15:03:53 button reading from server 2016-01-25 15:03:53 pressed
+2016-01-25 15:03:54 button Coil_RstTimer pressed
+2016-01-25 15:03:54 button reading from server 2016-01-25 15:03:54 pressed
+2016-01-25 15:03:54 button reading from server 2016-01-25 15:03:54 pressed
+2016-01-25 15:03:55 button reading from server 2016-01-25 15:03:55 pressed
+2016-01-25 15:03:55 button reading from server 2016-01-25 15:03:55 pressed
+2016-01-25 15:03:56 button reading from server 2016-01-25 15:03:56 pressed
+2016-01-25 15:03:56 button reading from server 2016-01-25 15:03:56 pressed
+2016-01-25 15:03:57 button reading from server 2016-01-25 15:03:57 pressed
+2016-01-25 15:03:57 button reading from server 2016-01-25 15:03:57 pressed
+2016-01-25 15:03:58 button reading from server 2016-01-25 15:03:58 pressed
+2016-01-25 15:03:58 button reading from server 2016-01-25 15:03:58 pressed
+2016-01-25 15:03:59 button reading from server 2016-01-25 15:03:59 pressed
+2016-01-25 15:03:59 button reading from server 2016-01-25 15:03:59 pressed
+2016-01-25 15:04:00 button reading from server 2016-01-25 15:04:00 pressed
+2016-01-25 15:04:00 button reading from server 2016-01-25 15:04:00 pressed
+2016-01-25 15:04:01 button reading from server 2016-01-25 15:04:01 pressed
+2016-01-25 15:04:01 button reading from server 2016-01-25 15:04:01 pressed
+2016-01-25 15:04:02 button reading from server 2016-01-25 15:04:02 pressed
+2016-01-25 15:04:02 button reading from server 2016-01-25 15:04:02 pressed
+2016-01-25 15:04:03 button reading from server 2016-01-25 15:04:03 pressed
+2016-01-25 15:04:03 button reading from server 2016-01-25 15:04:03 pressed
+2016-01-25 15:04:04 button reading from server 2016-01-25 15:04:04 pressed
+2016-01-25 15:04:04 button reading from server 2016-01-25 15:04:04 pressed
+2016-01-25 15:04:05 button reading from server 2016-01-25 15:04:05 pressed
+2016-01-25 15:04:05 button reading from server 2016-01-25 15:04:05 pressed
+2016-01-25 15:04:06 button reading from server 2016-01-25 15:04:06 pressed
+2016-01-25 15:04:06 button reading from server 2016-01-25 15:04:06 pressed
+2016-01-25 15:04:07 button reading from server 2016-01-25 15:04:07 pressed
+2016-01-25 15:04:07 button reading from server 2016-01-25 15:04:07 pressed
+2016-01-25 15:04:08 button reading from server 2016-01-25 15:04:08 pressed
+2016-01-25 15:04:08 button reading from server 2016-01-25 15:04:08 pressed
+2016-01-25 15:04:09 button reading from server 2016-01-25 15:04:09 pressed
+2016-01-25 15:04:09 button reading from server 2016-01-25 15:04:09 pressed
+2016-01-25 15:04:10 button reading from server 2016-01-25 15:04:10 pressed
+2016-01-25 15:04:10 button reading from server 2016-01-25 15:04:10 pressed
+2016-01-25 15:04:11 button reading from server 2016-01-25 15:04:11 pressed
+2016-01-25 15:04:11 button reading from server 2016-01-25 15:04:11 pressed
+2016-01-25 15:04:12 button reading from server 2016-01-25 15:04:12 pressed
+2016-01-25 15:04:12 button reading from server 2016-01-25 15:04:12 pressed
+2016-01-25 15:04:13 button reading from server 2016-01-25 15:04:13 pressed
+2016-01-25 15:04:13 button reading from server 2016-01-25 15:04:13 pressed
+2016-01-25 15:04:14 button reading from server 2016-01-25 15:04:14 pressed
+2016-01-25 15:04:14 button reading from server 2016-01-25 15:04:14 pressed
+2016-01-25 15:04:15 button reading from server 2016-01-25 15:04:15 pressed
+2016-01-25 15:04:15 button reading from server 2016-01-25 15:04:15 pressed
+2016-01-25 15:04:16 button reading from server 2016-01-25 15:04:16 pressed
+2016-01-25 15:06:01 button  HReg_Current pressed
+2016-01-25 15:06:02 button  HReg_Power pressed
+2016-01-25 15:06:50 button  HReg_Current pressed
+2016-01-25 15:19:39 button 23 HReg_Current pressed
+2016-01-25 15:19:44 button Coil_RstTimer pressed
+2016-01-25 15:20:08 button Coil_RstTimer pressed
+2016-01-25 15:20:08 button Coil_RstTimer pressed
+2016-01-25 15:25:41 button 23 HReg_Current pressed
+2016-01-25 15:25:43 button Coil_RstTimer pressed
+2016-01-25 15:25:43 button Coil_IgnOn pressed
+2016-01-25 16:28:28 button Coil_StTimerOFF pressed
