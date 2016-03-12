@@ -13,7 +13,7 @@ class Connection_to_power_supply():
         # port ='/dev/ttyUSB0',
         client = ModbusSerialClient(method='rtu', port=port, baudrate=19200, stopbits=1, bytesize=8, timeout=0.3)
 
-        print client.connect()
+       # print client.connect()
         indicator_list = {"IReg_State": 0,
                           "IReg_Voltage": 2,
                           "IReg_Current": 3,

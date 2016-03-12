@@ -1,7 +1,7 @@
-from chat import app
 from gevent import monkey
 from socketio.server import SocketIOServer
 
+from chat import app
 
 monkey.patch_all()
 

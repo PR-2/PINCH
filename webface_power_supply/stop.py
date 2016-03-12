@@ -15,7 +15,8 @@ def stop(process, name):
 
 
 for line in out.splitlines():
-    # print line
     stop(line, "server.py")
     stop(line, "run.py")
     stop(line, "server_gauge.py")
+    stop(line, "ask_gauge.py")
+    stop(line, "ask_power.py")
