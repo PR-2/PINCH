@@ -12,6 +12,8 @@ socket =  io.connect('/ask_data',{
 
 socket.on('ask_data', function(data) {
     document.getElementById(data.datagram.split(" ")[0]).innerHTML = data.datagram;
+    document.getElementById("value").innerHTML = data.datagram.split(" ")[0];
+
 
 });
 

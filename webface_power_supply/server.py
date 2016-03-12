@@ -35,7 +35,7 @@ while True:
                 # check(data)
                 if data:
 
-                    answer = tr.translate("/dev/ttyUSB1", data)
+                    answer = tr.translate("/dev/ttyUSB0", data)
                     print answer
                     #  print >>sys.stderr, 'sending data back to the client'
                     connection.sendall(data + " " + str(answer))  # + " received from server")

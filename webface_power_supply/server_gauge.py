@@ -7,7 +7,7 @@ from PfeifferVacuum_Gauge import MaxiGauge, MaxiGaugeError
 
 import sys
 
-mg = MaxiGauge('/dev/ttyUSB0', 2)
+mg = MaxiGauge('/dev/ttyUSB1', 2)
 
 if os.path.exists("/tmp/python_unix_sockets_gauge"):
     os.remove("/tmp/python_unix_sockets_gauge")

@@ -253,7 +253,10 @@ def connect_to_server(socket_file, log_file, msg):
 ###############################################################
 
 class Button(BaseNamespace, RoomsMixin, BroadcastMixin):
+    def recv_connect(self):
+        pass
     def recv_disconnect(self):
+
         # Remove nickname from the list       
         self.disconnect(silent=True)
 
