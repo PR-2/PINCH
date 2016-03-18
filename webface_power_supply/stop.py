@@ -20,3 +20,5 @@ for line in out.splitlines():
     stop(line, "server_gauge.py")
     stop(line, "ask_gauge.py")
     stop(line, "ask_power.py")
+    stop(line, "capacity_server.py")
+    stop(line, "ask_capacity_changer")

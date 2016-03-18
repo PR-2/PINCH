@@ -7,7 +7,7 @@ import datetime
 import os
 import os.path
 import socket
-import threading
+
 
 from flask import Flask, Response, request, render_template
 
@@ -17,6 +17,24 @@ from socketio.namespace import BaseNamespace
 
 app = Flask(__name__)
 app.debug = True
+
+
+@app.route('/capacity_changer')
+def capacity_changer():
+    indicator_list = "IReg_C1-value IReg_C2-value IReg_C-value IReg_Amplitude-mismatch IReg_Phase-mismatch"
+    coil_list = 'Coil_AutoResistanceSetupOn Coil_AutoReturnOn Coil_EEPROM-writeOn ' \
+                'Coil_AutoPhaseSetupOn Coil_EngineOn ' \
+                 'Coil_AutoPhaseSetupOff Coil_AutoResistanceSetupOff Coil_EEPROM-writeOff ' \
+                 'Coil_EngineOff Coil_AutoReturnOff'
+
+    command_list = "HReg_Min-C2-capacity HReg_ResistanceTuningSensitivity HReg_C-min-limit " \
+                   "HReg_PhaseTuningSensitivity HReg_Max-C1-capacity HReg_InstallationAmplitudeSensorZero " \
+                   "HReg_C-max-limit HReg_Max-C2-capacity HReg_Set-C2-value HReg_Set-C-value" \
+                   " HReg_C2-min-limit HReg_Modbus-address HReg_Min-C1-capacity " \
+                   "HReg_InstallationPhaseSensorZero HReg_C2-max-limit HReg_Threshold-auto-negotiation"
+
+    return render_template('capacity_changer.html', indicator_list=indicator_list,
+                           coil_list=coil_list, command_list=command_list)
 
 
 @app.route('/')
@@ -31,6 +49,8 @@ def rooms():
                            coil_list=coil_list, command_list=command_list)
 
 
+
+
 @app.route('/gauge')
 def gauge():
     gauge_list = "Gauge#1 Gauge#2"
@@ -39,73 +59,6 @@ def gauge():
 
 class GetOutOfLoop(Exception):
     pass
-
-
-class Read_data(BaseNamespace, BroadcastMixin):
-    def recv_connect(self):
-
-        def ask_for_data():
-
-            while True:
-
-                try:
-
-                    command_list = "IReg_State IReg_Voltage IReg_Current IReg_Power IReg_Sec IReg_Min IReg_Hour"
-                    for command in command_list.split():
-                        msg = command + "_ask" + " = "
-                        datagram = connect_to_server("/tmp/python_unix_sockets_example", None, msg)
-                        self.emit('ask_data', {'datagram': datagram})
-
-                    gevent.sleep(0.01)
-                except:
-                    break
-
-        self.ask_data = self.spawn(ask_for_data)
-
-    def get_initial_acl(self):
-        super(Read_data, self).get_initial_acl()
-
-    def recv_disconnect(self):
-
-        gevent.kill(self.ask_data)
-        self.jobs = []
-
-        return True
-
-
-class Read_Gauge(BaseNamespace, BroadcastMixin):
-    lock = threading.Lock()
-
-    n = 0
-
-    def recv_connect(self):
-
-        def ask_gauge():
-
-            while True:
-
-                command_list = "Gauge#1,Gauge#2"
-                for command in command_list.split(","):
-                    msg = command + "_ask" + " = "
-
-                    datagram = connect_to_server("/tmp/python_unix_sockets_gauge", None, msg)
-
-                    self.emit('ask_gauge', {'datagram': datagram})
-
-                gevent.sleep(0.01)
-
-        self.ask = self.spawn(ask_gauge)
-        gevent.sleep(0.01)
-
-    def get_initial_acl(self):
-        super(Read_Gauge, self).get_initial_acl()
-
-    def recv_disconnect(self):
-
-        gevent.kill(self.ask)
-        self.jobs = []
-
-        return True
 
 
 def connect_to_server(socket_file, log_file, msg):
@@ -130,6 +83,61 @@ def connect_to_server(socket_file, log_file, msg):
         return "No Data"
 
 
+
+
+class Read_data (BaseNamespace, BroadcastMixin):
+    command_list = "IReg_State IReg_Voltage IReg_Current IReg_Power IReg_Sec IReg_Min IReg_Hour"
+    socket_name = "/tmp/python_unix_sockets_example"
+    emit_path= 'ask_data'
+
+    def recv_connect(self):
+
+        def ask_for_data():
+
+            while True:
+
+                try:
+
+
+                    for command in self.command_list.split():
+                        msg = command + "_ask" + " = "
+                        print msg
+                        datagram = connect_to_server(self.socket_name, None, msg)
+                        print datagram
+                        self.emit(self.emit_path, {'datagram': datagram})
+
+
+                    gevent.sleep(1)
+                except:
+                    break
+
+        self.ask_data = self.spawn(ask_for_data)
+
+    def get_initial_acl(self):
+        super(Read_data, self).get_initial_acl()
+
+    def recv_disconnect(self):
+
+        gevent.kill(self.ask_data)
+        self.jobs = []
+
+        return True
+
+class Read_Capacity( Read_data):
+    command_list = "IReg_C1-value IReg_C2-value IReg_C-value " \
+                   "IReg_Amplitude-mismatch IReg_Phase-mismatch"
+    socket_name = "/tmp/python_unix_sockets_capacity"
+    emit_path = 'ask_data_cap'
+
+
+
+class Read_Gauge( Read_data):
+    command_list = "Gauge#1 Gauge#2"
+    socket_name = "/tmp/python_unix_sockets_gauge"
+    emit_path ='ask_gauge'
+
+
+
 class Button(BaseNamespace, RoomsMixin, BroadcastMixin):
     def recv_connect(self):
         pass
@@ -144,11 +152,21 @@ class Button(BaseNamespace, RoomsMixin, BroadcastMixin):
 
         self.emit('datagram', {'datagram': datagram})
 
+class Button_Capacity( Button):
+
+    def on_click_event(self, msg):
+        datagram = connect_to_server("/tmp/python_unix_sockets_capacity", "./log.txt", msg)
+
+        self.emit('datagram', {'datagram': datagram})
+
+
+
 
 @app.route('/socket.io/<path:remaining>')
 def socketio(remaining):
     try:
-        socketio_manage(request.environ, {'/ask_data': Read_data, '/button': Button, '/ask_gauge': Read_Gauge})
+        socketio_manage(request.environ, {'/ask_data': Read_data, '/button': Button, '/ask_gauge': Read_Gauge,
+                                          '/ask_data_cap': Read_Capacity, '/button_cap': Button_Capacity})
 
 
     except:
