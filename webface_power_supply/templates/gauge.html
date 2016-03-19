@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <link href="static/css/style.css" rel="stylesheet">
     <script type="text/javascript" src="static/jquery-1.6.1.min.js"></script>
     <script type="text/javascript" src="static/jquery.flot.js"></script>
     <script type="text/javascript" src="static/socket.io.js"></script>
- <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="static/excanvas.js"></script><![endif   ]-->
-      <!-- My own scripts -->
-     <script type="text/javascript" src="static/connection_gauge.js"> </script>
-  </head>
+    <!--[if lte IE 8]>
+    <script language="javascript" type="text/javascript" src="static/excanvas.js"></script><![endif   ]-->
+    <!-- My own scripts -->
+    <script>
+            var socket_ask_name='ask_gauge';
+    </script>
+    <script type="text/javascript" src="static/connection_socket_get.js"></script>
+</head>
 
 <body>
-  {% for name in gauge_list.split() %}
-     <p id = {{ name }} > {{ name }} = </p>
-     {% endfor %}
+{% for name in gauge_list.split() %}
+<p id={{ name }}> {{ name }} = </p>
+{% endfor %}
 
 
 </body>

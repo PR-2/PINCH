@@ -1,19 +1,12 @@
 from gevent import monkey
-
-monkey.patch_all()
-
 import gevent
-import datetime
-import os
-import os.path
-import socket
-
-
 from flask import Flask, Response, request, render_template
-
 from socketio import socketio_manage
 from socketio.mixins import RoomsMixin, BroadcastMixin
 from socketio.namespace import BaseNamespace
+from connection import connect_to_server
+
+monkey.patch_all()
 
 app = Flask(__name__)
 app.debug = True
@@ -22,10 +15,9 @@ app.debug = True
 @app.route('/capacity_changer')
 def capacity_changer():
     indicator_list = "IReg_C1-value IReg_C2-value IReg_C-value IReg_Amplitude-mismatch IReg_Phase-mismatch"
-    coil_list = 'Coil_AutoResistanceSetupOn Coil_AutoReturnOn Coil_EEPROM-writeOn ' \
-                'Coil_AutoPhaseSetupOn Coil_EngineOn ' \
-                 'Coil_AutoPhaseSetupOff Coil_AutoResistanceSetupOff Coil_EEPROM-writeOff ' \
-                 'Coil_EngineOff Coil_AutoReturnOff'
+    coil_list = 'Coil_AutoResistanceSetupOn  Coil_AutoResistanceSetupOff Coil_AutoReturnOn  Coil_AutoReturnOff ' \
+                'Coil_EEPROM-writeOn  Coil_EEPROM-writeOff ' \
+                'Coil_AutoPhaseSetupOn Coil_AutoPhaseSetupOff Coil_EngineOn Coil_EngineOff'
 
     command_list = "HReg_Min-C2-capacity HReg_ResistanceTuningSensitivity HReg_C-min-limit " \
                    "HReg_PhaseTuningSensitivity HReg_Max-C1-capacity HReg_InstallationAmplitudeSensorZero " \
@@ -49,8 +41,6 @@ def rooms():
                            coil_list=coil_list, command_list=command_list)
 
 
-
-
 @app.route('/gauge')
 def gauge():
     gauge_list = "Gauge#1 Gauge#2"
@@ -61,34 +51,10 @@ class GetOutOfLoop(Exception):
     pass
 
 
-def connect_to_server(socket_file, log_file, msg):
-    if log_file:
-        with open(log_file, 'a') as f:
-            f.write(datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S') + " button " + str(
-                msg) + " pressed" + "\n")
-    try:
-        if os.path.exists(socket_file):
-            client = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-
-            client.settimeout(0.2)
-            client.connect(socket_file)
-            client.settimeout(None)
-
-            client.send(msg)
-            datagram = client.recv(256)
-
-            client.close()
-            return datagram
-    except:
-        return "No Data"
-
-
-
-
-class Read_data (BaseNamespace, BroadcastMixin):
+class Read_data(BaseNamespace, BroadcastMixin):
     command_list = "IReg_State IReg_Voltage IReg_Current IReg_Power IReg_Sec IReg_Min IReg_Hour"
     socket_name = "/tmp/python_unix_sockets_example"
-    emit_path= 'ask_data'
+    emit_path = 'ask_data'
 
     def recv_connect(self):
 
@@ -98,14 +64,12 @@ class Read_data (BaseNamespace, BroadcastMixin):
 
                 try:
 
-
                     for command in self.command_list.split():
                         msg = command + "_ask" + " = "
                         print msg
                         datagram = connect_to_server(self.socket_name, None, msg)
                         print datagram
                         self.emit(self.emit_path, {'datagram': datagram})
-
 
                     gevent.sleep(1)
                 except:
@@ -123,19 +87,18 @@ class Read_data (BaseNamespace, BroadcastMixin):
 
         return True
 
-class Read_Capacity( Read_data):
+
+class Read_Capacity(Read_data):
     command_list = "IReg_C1-value IReg_C2-value IReg_C-value " \
                    "IReg_Amplitude-mismatch IReg_Phase-mismatch"
     socket_name = "/tmp/python_unix_sockets_capacity"
     emit_path = 'ask_data_cap'
 
 
-
-class Read_Gauge( Read_data):
+class Read_Gauge(Read_data):
     command_list = "Gauge#1 Gauge#2"
     socket_name = "/tmp/python_unix_sockets_gauge"
-    emit_path ='ask_gauge'
-
+    emit_path = 'ask_gauge'
 
 
 class Button(BaseNamespace, RoomsMixin, BroadcastMixin):
@@ -152,14 +115,12 @@ class Button(BaseNamespace, RoomsMixin, BroadcastMixin):
 
         self.emit('datagram', {'datagram': datagram})
 
-class Button_Capacity( Button):
 
+class Button_Capacity(Button):
     def on_click_event(self, msg):
         datagram = connect_to_server("/tmp/python_unix_sockets_capacity", "./log.txt", msg)
 
         self.emit('datagram', {'datagram': datagram})
-
-
 
 
 @app.route('/socket.io/<path:remaining>')

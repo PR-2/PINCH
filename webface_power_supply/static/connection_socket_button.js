@@ -1,12 +1,10 @@
 WEB_SOCKET_SWF_LOCATION = "/static/WebSocketMain.swf";
 WEB_SOCKET_DEBUG = true;
 
-
 var socket_button;
 
-
 $(function () {
-     socket_button = io.connect("/button", {
+     socket_button = io.connect('/'+socket_name, {
     'reconnection': false,
 
 });

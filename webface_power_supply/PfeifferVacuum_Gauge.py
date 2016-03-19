@@ -25,49 +25,56 @@
 ### If you have `pip` installed on your computer, getting PySerial is as easy as
 ### pip install pyserial
 
-#Добавлена возможность выбора количества опрашиваемых каналов (строки 36, 37, 66, 69).
-#by Bayander
+# Добавлена возможность выбора количества опрашиваемых каналов (строки 36, 37, 66, 69).
+# by Bayander
+
+import math
+import signal
+import time
 
 import serial
-import time
-import signal
-import math
 
-class MaxiGauge (object):
+
+class MaxiGauge(object):
     def __init__(self, serialPort, sensorNumber, baud=9600, debug=False):
         self.sensorNumber = sensorNumber
-        self.debug=debug
+        self.debug = debug
         try:
             self.connection = serial.Serial(serialPort, baudrate=baud, timeout=0.2)
         except serial.serialutil.SerialException as se:
             raise MaxiGaugeError(se)
-        #self.send(C['ETX']) ### We might reset the connection first, but it doesn't really matter:
+        # self.send(C['ETX']) ### We might reset the connection first, but it doesn't really matter:
         self.logfilename = 'measurement-data.txt'
 
     def checkDevice(self):
         message = "The Display Contrast is currently set to %d (out of 20).\n" % self.displayContrast()
-        message += "Keys since MaxiGauge was switched on: %s (out of 1,2,3,4,5).\n" % ", ".join( map (str, self.pressedKeys()) )
+        message += "Keys since MaxiGauge was switched on: %s (out of 1,2,3,4,5).\n" % ", ".join(
+            map(str, self.pressedKeys()))
         return message
 
     def pressedKeys(self):
-        keys = int(self.send('TKB',1)[0])
+        keys = int(self.send('TKB', 1)[0])
         pressedKeys = []
-        for i in [4,3,2,1,0]: # It's got 5 keys
-            if keys/2**i == 1:
-                pressedKeys.append(i+1)
-                keys = keys%2**i
+        for i in [4, 3, 2, 1, 0]:  # It's got 5 keys
+            if keys / 2 ** i == 1:
+                pressedKeys.append(i + 1)
+                keys = keys % 2 ** i
         pressedKeys.reverse()
         return pressedKeys
 
-    def displayContrast(self,newContrast=-1):
-        if newContrast == -1: return int(self.send('DCC',1)[0])
-        else: return int(self.send('DCC,%d' % (newContrast,) ,1)[0])
+    def displayContrast(self, newContrast=-1):
+        if newContrast == -1:
+            return int(self.send('DCC', 1)[0])
+        else:
+            return int(self.send('DCC,%d' % (newContrast,), 1)[0])
 
     def pressures(self):
-        return [self.pressure(i+1) for i in range(self.sensorNumber)] #Добавлена возможность выбора количества опрашиваемых каналов.
+        return [self.pressure(i + 1) for i in
+                range(self.sensorNumber)]  # Добавлена возможность выбора количества опрашиваемых каналов.
 
     def pressure(self, sensor):
-        if sensor < 1 or sensor > self.sensorNumber: raise MaxiGaugeError('Sensor can only be between 1 and 6. You choose ' + str(sensor)) #Добавлено "self.sensorNumber"
+        if sensor < 1 or sensor > self.sensorNumber: raise MaxiGaugeError(
+            'Sensor can only be between 1 and 6. You choose ' + str(sensor))  # Добавлено "self.sensorNumber"
         reading = self.send('PR%d' % sensor, 1)  ## reading will have the form x,x.xxxEsx <CR><LF> (see p.88)
         try:
             r = reading[0].split(',')
@@ -81,14 +88,14 @@ class MaxiGauge (object):
         self.stopping_continuous_update.set()
         signal.signal(signal.SIGINT, signal.SIG_DFL)
 
-    def start_continuous_pressure_updates(self, update_time, log_every = 0):
+    def start_continuous_pressure_updates(self, update_time, log_every=0):
         from threading import Thread, Event
-        self.stopping_continuous_update =  Event()
+        self.stopping_continuous_update = Event()
         signal.signal(signal.SIGINT, self.signal_handler)
         self.update_time = update_time
         self.log_every = log_every
         self.update_counter = 1
-        self.t = Thread(target = self.continuous_pressure_updates)
+        self.t = Thread(target=self.continuous_pressure_updates)
         self.t.daemon = True
         self.t.start()
 
@@ -96,50 +103,50 @@ class MaxiGauge (object):
 
         ## The following lines were written in order to keep the pressure history in memory.
         ## Unfortunately this takes too long to load on a Raspberry Pi for larger data files.
-        #f = open( self.logfilename, 'r' )
-        #import csv
-        #log = csv.reader(f)
+        # f = open( self.logfilename, 'r' )
+        # import csv
+        # log = csv.reader(f)
         ## Get the 1st line, assuming it contains the column titles
-        #fieldnames = log.next()
-        #cols = []
-        #i = 0
-        #for fieldname in fieldnames:
+        # fieldnames = log.next()
+        # cols = []
+        # i = 0
+        # for fieldname in fieldnames:
         #    if i == 0 : continue
         #    if fieldname.strip() != "":
         #        cols.append(i)
         #    i += 1
-        #history = []
-        #for row in log:
+        # history = []
+        # for row in log:
         #    if len(row) != len(fieldnames): continue
         #    history.append([int(row[0])] + [float(val) if val.strip() else None for val in row[1:]])
-        #self.history = history
-        #log = None
-        #f.close()
+        # self.history = history
+        # log = None
+        # f.close()
         cache = []
         while not self.stopping_continuous_update.isSet():
             startTime = time.time()
             self.update_counter += 1
             self.cached_pressures = self.pressures()
-            cache.append([time.time()] + [sensor.pressure if sensor.status in [0,1,2] else float('nan') for sensor in self.cached_pressures] )
-            if self.log_every > 0 and (self.update_counter%self.log_every == 0):
-                logtime = cache[self.log_every/2][0]
-                cache = zip(*cache) # transpose cache
-                cache = cache[1:] # remove first element
-                avgs = [(sum(vals)/self.log_every) for vals in cache]
+            cache.append([time.time()] + [sensor.pressure if sensor.status in [0, 1, 2] else float('nan') for sensor in
+                                          self.cached_pressures])
+            if self.log_every > 0 and (self.update_counter % self.log_every == 0):
+                logtime = cache[self.log_every / 2][0]
+                cache = zip(*cache)  # transpose cache
+                cache = cache[1:]  # remove first element
+                avgs = [(sum(vals) / self.log_every) for vals in cache]
                 self.log_to_file(logtime=logtime, logvalues=avgs)
                 cache = []
-            time.sleep(0.1) # we want a minimum pause of 0.1 s
-            while not self.stopping_continuous_update.isSet() and (self.update_time - (time.time()-startTime) > .2):
+            time.sleep(0.1)  # we want a minimum pause of 0.1 s
+            while not self.stopping_continuous_update.isSet() and (self.update_time - (time.time() - startTime) > .2):
                 time.sleep(.2)
-            time.sleep(max([0., self.update_time - (time.time()-startTime)]))
-        #sys.stderr.write(line)
-        if self.log_every > 0 and (self.update_counter%self.log_every == 0):
+            time.sleep(max([0., self.update_time - (time.time() - startTime)]))
+        # sys.stderr.write(line)
+        if self.log_every > 0 and (self.update_counter % self.log_every == 0):
             self.flush_logfile()
-        #from thread import interrupt_main
-        #interrupt_main()
+            # from thread import interrupt_main
+            # interrupt_main()
 
-
-    def log_to_file(self, logtime = None, logvalues = None):
+    def log_to_file(self, logtime=None, logvalues=None):
         try:
             self.logfile
         except:
@@ -147,11 +154,12 @@ class MaxiGauge (object):
         if not logtime:
             logtime = time.time()
         if not logvalues:
-            logvalues = [sensor.pressure if sensor.status in [0,1,2] else float('nan') for sensor in self.cached_pressures]
+            logvalues = [sensor.pressure if sensor.status in [0, 1, 2] else float('nan') for sensor in
+                         self.cached_pressures]
         line = "%d, " % logtime + ', '.join(["%.3E" % val if not math.isnan(val) else '' for val in logvalues])
-        self.logfile.write(line+'\n')
-        #self.history.append([int(time.time())] + [sensor.pressure if sensor.status in [0,1,2] else None for sensor in self.cached_pressures])
-        #self.flush_logfile()
+        self.logfile.write(line + '\n')
+        # self.history.append([int(time.time())] + [sensor.pressure if sensor.status in [0,1,2] else None for sensor in self.cached_pressures])
+        # self.flush_logfile()
 
     def flush_logfile(self):
         try:
@@ -162,11 +170,11 @@ class MaxiGauge (object):
     def debugMessage(self, message):
         if self.debug: print(repr(message))
 
-    def send(self, mnemonic, numEnquiries = 0):
+    def send(self, mnemonic, numEnquiries=0):
         self.connection.flushInput()
-        self.write(mnemonic+LINE_TERMINATION)
-        #if mnemonic != C['ETX']: self.read()
-        #self.read()
+        self.write(mnemonic + LINE_TERMINATION)
+        # if mnemonic != C['ETX']: self.read()
+        # self.read()
         self.getACQorNAK()
         response = []
         for i in range(numEnquiries):
@@ -174,7 +182,7 @@ class MaxiGauge (object):
             response.append(self.read())
         return response
 
-    def write(self,what):
+    def write(self, what):
         self.debugMessage(what)
         self.connection.write(what)
 
@@ -187,7 +195,7 @@ class MaxiGauge (object):
             x = self.connection.read()
             self.debugMessage(x)
             data += x
-            if len(data)>1 and data[-2:]==LINE_TERMINATION:
+            if len(data) > 1 and data[-2:] == LINE_TERMINATION:
                 break
         return data[:-len(LINE_TERMINATION)]
 
@@ -195,19 +203,21 @@ class MaxiGauge (object):
         returncode = self.connection.readline()
         self.debugMessage(returncode)
         ## The following is usually expected but our MaxiGauge controller sometimes forgets this parameter... That seems to be a bug with the DCC command.
-        #if len(returncode)<3: raise MaxiGaugeError('Only received a line termination from MaxiGauge. Was expecting ACQ or NAK.')
-        if len(returncode)<3: self.debugMessage('Only received a line termination from MaxiGauge. Was expecting ACQ or NAK.')
-        if len(returncode)>2 and returncode[-3] == C['NAK']:
+        # if len(returncode)<3: raise MaxiGaugeError('Only received a line termination from MaxiGauge. Was expecting ACQ or NAK.')
+        if len(returncode) < 3: self.debugMessage(
+            'Only received a line termination from MaxiGauge. Was expecting ACQ or NAK.')
+        if len(returncode) > 2 and returncode[-3] == C['NAK']:
             self.enquire()
             returnedError = self.read()
-            error = str(returnedError).split(',' , 1)
+            error = str(returnedError).split(',', 1)
             print repr(error)
-            errmsg = { 'System Error': ERR_CODES[0][int(error[0])] , 'Gauge Error': ERR_CODES[1][int(error[1])] }
+            errmsg = {'System Error': ERR_CODES[0][int(error[0])], 'Gauge Error': ERR_CODES[1][int(error[1])]}
             raise MaxiGaugeNAK(errmsg)
-        #if len(returncode)>2 and returncode[-3] != C['ACQ']: raise MaxiGaugeError('Expecting ACQ or NAK from MaxiGauge but neither were sent.')
-        if len(returncode)>2 and returncode[-3] != C['ACQ']: self.debugMessage('Expecting ACQ or NAK from MaxiGauge but neither were sent.')
+        # if len(returncode)>2 and returncode[-3] != C['ACQ']: raise MaxiGaugeError('Expecting ACQ or NAK from MaxiGauge but neither were sent.')
+        if len(returncode) > 2 and returncode[-3] != C['ACQ']: self.debugMessage(
+            'Expecting ACQ or NAK from MaxiGauge but neither were sent.')
         # if no exception raised so far, the interface is just fine:
-        return returncode[:-(len(LINE_TERMINATION)+1)]
+        return returncode[:-(len(LINE_TERMINATION) + 1)]
 
     def disconnect(self):
         try:
@@ -217,14 +227,16 @@ class MaxiGauge (object):
 
     def __del__(self):
         self.disconnect()
-        #self.send(C['ETX'])
+        # self.send(C['ETX'])
         if hasattr(self, 'connection') and self.connection: self.connection.close()
+
 
 class PressureReading(object):
     def __init__(self, id, status, pressure):
-        if int(id) not in range(1,7): raise MaxiGaugeError('Pressure Gauge ID must be between 1-6')
+        if int(id) not in range(1, 7): raise MaxiGaugeError('Pressure Gauge ID must be between 1-6')
         self.id = int(id)
-        if int(status) not in PRESSURE_READING_STATUS.keys(): raise MaxiGaugeError('The Pressure Status must be in the range %s' % PRESSURE_READING_STATUS.keys())
+        if int(status) not in PRESSURE_READING_STATUS.keys(): raise MaxiGaugeError(
+            'The Pressure Status must be in the range %s' % PRESSURE_READING_STATUS.keys())
         self.status = int(status)
         self.pressure = float(pressure)
 
@@ -232,7 +244,8 @@ class PressureReading(object):
         return PRESSURE_READING_STATUS[self.status]
 
     def __repr__(self):
-        return "Gauge #%d: Status %d (%s), Pressure: %f mbar\n" % (self.id, self.status, self.statusMsg(), self.pressure)
+        return "Gauge #%d: Status %d (%s), Pressure: %f mbar\n" % (
+            self.id, self.status, self.statusMsg(), self.pressure)
 
 
 ### ------ now we define the exceptions that could occur ------
@@ -240,103 +253,104 @@ class PressureReading(object):
 class MaxiGaugeError(Exception):
     pass
 
+
 class MaxiGaugeNAK(MaxiGaugeError):
     pass
+
 
 ### ------- Control Symbols as defined on p. 81 of the english
 ###        manual for the Pfeiffer Vacuum TPG256A  -----------
 C = {
-  'ETX': "\x03", # End of Text (Ctrl-C)   Reset the interface
-  'CR':  "\x0D", # Carriage Return        Go to the beginning of line
-  'LF':  "\x0A", # Line Feed              Advance by one line
-  'ENQ': "\x05", # Enquiry                Request for data transmission
-  'ACQ': "\x06", # Acknowledge            Positive report signal
-  'NAK': "\x15", # Negative Acknowledge   Negative report signal
-  'ESC': "\x1b", # Escape
+    'ETX': "\x03",  # End of Text (Ctrl-C)   Reset the interface
+    'CR': "\x0D",  # Carriage Return        Go to the beginning of line
+    'LF': "\x0A",  # Line Feed              Advance by one line
+    'ENQ': "\x05",  # Enquiry                Request for data transmission
+    'ACQ': "\x06",  # Acknowledge            Positive report signal
+    'NAK': "\x15",  # Negative Acknowledge   Negative report signal
+    'ESC': "\x1b",  # Escape
 }
 
-LINE_TERMINATION=C['CR']+C['LF'] # CR, LF and CRLF are all possible (p.82)
+LINE_TERMINATION = C['CR'] + C['LF']  # CR, LF and CRLF are all possible (p.82)
 
 ### Mnemonics as defined on p. 85
 M = [
-  'BAU', # Baud rate                           Baud rate                                    95
-  'CAx', # Calibration factor Sensor x         Calibration factor sensor x (1 ... 6)        92
-  'CID', # Measurement point names             Measurement point names                      88
-  'DCB', # Display control Bargraph            Bargraph                                     89
-  'DCC', # Display control Contrast            Display control contrast                     90
-  'DCD', # Display control Digits              Display digits                               88
-  'DCS', # Display control Screensave          Display control screensave                   90
-  'DGS', # Degas                               Degas                                        93
-  'ERR', # Error Status                        Error status                                 97
-  'FIL', # Filter time constant                Filter time constant                         92
-  'FSR', # Full scale range of linear sensors  Full scale range of linear sensors           93
-  'LOC', # Parameter setup lock                Parameter setup lock                         91
-  'NAD', # Node (device) address for RS485     Node (device) address for RS485              96
-  'OFC', # Offset correction                   Offset correction                            93
-  'OFC', # Offset correction                   Offset correction                            93
-  'PNR', # Program number                      Program number                               98
-  'PRx', # Status, Pressure sensor x (1 ... 6) Status, Pressure sensor x (1 ... 6)          88
-  'PUC', # Underrange Ctrl                     Underrange control                           91
-  'RSX', # Interface                           Interface                                    94
-  'SAV', # Save default                        Save default                                 94
-  'SCx', # Sensor control                      Sensor control                               87
-  'SEN', # Sensor on/off                       Sensor on/off                                86
-  'SPx', # Set Point Control Source for Relay xThreshold value setting, Allocation          90
-  'SPS', # Set Point Status A,B,C,D,E,F        Set point status                             91
-  'TAI', # Test program A/D Identify           Test A/D converter identification inputs    100
-  'TAS', # Test program A/D Sensor             Test A/D converter measurement value inputs 100
-  'TDI', # Display test                        Display test                                 98
-  'TEE', # EEPROM test                         EEPROM test                                 100
-  'TEP', # EPROM test                          EPROM test                                   99
-  'TID', # Sensor identification               Sensor identification                       101
-  'TKB', # Keyboard test                       Keyboard test                                99
-  'TRA', # RAM test                            RAM test                                     99
-  'UNI', # Unit of measurement (Display)       Unit of measurement (pressure)               89
-  'WDT', # Watchdog and System Error Control   Watchdog and system error control           101
+    'BAU',  # Baud rate                           Baud rate                                    95
+    'CAx',  # Calibration factor Sensor x         Calibration factor sensor x (1 ... 6)        92
+    'CID',  # Measurement point names             Measurement point names                      88
+    'DCB',  # Display control Bargraph            Bargraph                                     89
+    'DCC',  # Display control Contrast            Display control contrast                     90
+    'DCD',  # Display control Digits              Display digits                               88
+    'DCS',  # Display control Screensave          Display control screensave                   90
+    'DGS',  # Degas                               Degas                                        93
+    'ERR',  # Error Status                        Error status                                 97
+    'FIL',  # Filter time constant                Filter time constant                         92
+    'FSR',  # Full scale range of linear sensors  Full scale range of linear sensors           93
+    'LOC',  # Parameter setup lock                Parameter setup lock                         91
+    'NAD',  # Node (device) address for RS485     Node (device) address for RS485              96
+    'OFC',  # Offset correction                   Offset correction                            93
+    'OFC',  # Offset correction                   Offset correction                            93
+    'PNR',  # Program number                      Program number                               98
+    'PRx',  # Status, Pressure sensor x (1 ... 6) Status, Pressure sensor x (1 ... 6)          88
+    'PUC',  # Underrange Ctrl                     Underrange control                           91
+    'RSX',  # Interface                           Interface                                    94
+    'SAV',  # Save default                        Save default                                 94
+    'SCx',  # Sensor control                      Sensor control                               87
+    'SEN',  # Sensor on/off                       Sensor on/off                                86
+    'SPx',  # Set Point Control Source for Relay xThreshold value setting, Allocation          90
+    'SPS',  # Set Point Status A,B,C,D,E,F        Set point status                             91
+    'TAI',  # Test program A/D Identify           Test A/D converter identification inputs    100
+    'TAS',  # Test program A/D Sensor             Test A/D converter measurement value inputs 100
+    'TDI',  # Display test                        Display test                                 98
+    'TEE',  # EEPROM test                         EEPROM test                                 100
+    'TEP',  # EPROM test                          EPROM test                                   99
+    'TID',  # Sensor identification               Sensor identification                       101
+    'TKB',  # Keyboard test                       Keyboard test                                99
+    'TRA',  # RAM test                            RAM test                                     99
+    'UNI',  # Unit of measurement (Display)       Unit of measurement (pressure)               89
+    'WDT',  # Watchdog and System Error Control   Watchdog and system error control           101
 ]
-
 
 ### Error codes as defined on p. 97
 ERR_CODES = [
-  {
+    {
         0: 'No error',
         1: 'Watchdog has responded',
         2: 'Task fail error',
         4: 'IDCX idle error',
         8: 'Stack overflow error',
-       16: 'EPROM error',
-       32: 'RAM error',
-       64: 'EEPROM error',
-      128: 'Key error',
-     4096: 'Syntax error',
-     8192: 'Inadmissible parameter',
-    16384: 'No hardware',
-    32768: 'Fatal error'
-  } ,
-  {
+        16: 'EPROM error',
+        32: 'RAM error',
+        64: 'EEPROM error',
+        128: 'Key error',
+        4096: 'Syntax error',
+        8192: 'Inadmissible parameter',
+        16384: 'No hardware',
+        32768: 'Fatal error'
+    },
+    {
         0: 'No error',
         1: 'Sensor 1: Measurement error',
         2: 'Sensor 2: Measurement error',
         4: 'Sensor 3: Measurement error',
         8: 'Sensor 4: Measurement error',
-       16: 'Sensor 5: Measurement error',
-       32: 'Sensor 6: Measurement error',
-      512: 'Sensor 1: Identification error',
-     1024: 'Sensor 2: Identification error',
-     2048: 'Sensor 3: Identification error',
-     4096: 'Sensor 4: Identification error',
-     8192: 'Sensor 5: Identification error',
-    16384: 'Sensor 6: Identification error',
-  }
+        16: 'Sensor 5: Measurement error',
+        32: 'Sensor 6: Measurement error',
+        512: 'Sensor 1: Identification error',
+        1024: 'Sensor 2: Identification error',
+        2048: 'Sensor 3: Identification error',
+        4096: 'Sensor 4: Identification error',
+        8192: 'Sensor 5: Identification error',
+        16384: 'Sensor 6: Identification error',
+    }
 ]
 
 ### pressure status as defined on p.88
 PRESSURE_READING_STATUS = {
-  0: 'Measurement data okay',
-  1: 'Underrange',
-  2: 'Overrange',
-  3: 'Sensor error',
-  4: 'Sensor off',
-  5: 'No sensor',
-  6: 'Identification error'
+    0: 'Measurement data okay',
+    1: 'Underrange',
+    2: 'Overrange',
+    3: 'Sensor error',
+    4: 'Sensor off',
+    5: 'No sensor',
+    6: 'Identification error'
 }

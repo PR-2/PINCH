@@ -6,8 +6,7 @@ from capacity_changer import *
 
 
 tr = Tr(indicator_list,coil_on_list,coil_off_list,command_list,"/dev/ttyUSB0")
-
-path = "/tmp/python_unix_sockets_example"
+path = "/tmp/python_unix_sockets_capacity"
 server = initialize(path)
 
 
@@ -18,3 +17,4 @@ def read_device_function(data):
 
 start(server, read_device_function)
 stop(path)
+
