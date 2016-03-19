@@ -16,6 +16,7 @@ class Connection():
 
     def translate(self, command):
         self.lock.acquire()
+        self.client.connect()
 
 # input registers
         if command.split("_")[0] == "IReg":
