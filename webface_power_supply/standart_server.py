@@ -28,7 +28,7 @@ def start(server, read_device_function):
 
                 data = connection.recv(256)
 
-                if ("ask" not in data):
+                if ("_ask " not in data):
 
                     answer = read_device_function(data)
 
