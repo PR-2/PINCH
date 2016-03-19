@@ -41,6 +41,22 @@ def rooms():
                            coil_list=coil_list, command_list=command_list)
 
 
+@app.route('/ps_3000_dc')
+def ps_3000_dc():
+    indicator_list = "HReg_OutputVoltage HReg_OutputCurrent HReg_Temperature "
+    coil_list = ''
+
+    command_list = "HReg_OutputVoltage HReg_WorkingTime HReg_Version HReg_Parity " \
+                   "HReg_StatusFlag HReg_SetCurrent HReg_MenuLanguage HReg_TimeForWork " \
+                   "HReg_Id HReg_SetVoltage HReg_Temperature HReg_RateOfDecay " \
+                   "HReg_SetPower HReg_NetFlag HReg_DelayChannel HReg_InterfaceType " \
+                   "HReg_Status HReg_SetStatus HReg_OutputCurrent HReg_RateOfRise " \
+                   "HReg_OutputPower HReg_NetAddress HReg_ConnectionSpeed "
+
+    return render_template('ps_3000_dc.html', indicator_list=indicator_list,
+                           coil_list=coil_list, command_list=command_list)
+
+
 @app.route('/gauge')
 def gauge():
     gauge_list = "Gauge#1 Gauge#2"
@@ -66,9 +82,9 @@ class Read_data(BaseNamespace, BroadcastMixin):
 
                     for command in self.command_list.split():
                         msg = command + "_ask" + " = "
-                        print msg
+                       # print msg
                         datagram = connect_to_server(self.socket_name, None, msg)
-                        print datagram
+                      #  print datagram
                         self.emit(self.emit_path, {'datagram': datagram})
 
                     gevent.sleep(1)
@@ -93,6 +109,11 @@ class Read_Capacity(Read_data):
                    "IReg_Amplitude-mismatch IReg_Phase-mismatch"
     socket_name = "/tmp/python_unix_sockets_capacity"
     emit_path = 'ask_data_cap'
+
+class Read_PS(Read_data):
+    command_list = "HReg_OutputVoltage HReg_OutputCurrent HReg_Temperature "
+    socket_name = "/tmp/python_unix_sockets_ps_3_2_1_3000"
+    emit_path = 'ask_data_ps'
 
 
 class Read_Gauge(Read_data):
@@ -122,12 +143,20 @@ class Button_Capacity(Button):
 
         self.emit('datagram', {'datagram': datagram})
 
+class Button_PS(Button):
+    def on_click_event(self, msg):
+        datagram = connect_to_server("/tmp/python_unix_sockets_ps_3_2_1_3000", "./log.txt", msg)
+
+
+        self.emit('datagram', {'datagram': datagram})
+
 
 @app.route('/socket.io/<path:remaining>')
 def socketio(remaining):
     try:
         socketio_manage(request.environ, {'/ask_data': Read_data, '/button': Button, '/ask_gauge': Read_Gauge,
-                                          '/ask_data_cap': Read_Capacity, '/button_cap': Button_Capacity})
+                                          '/ask_data_cap': Read_Capacity, '/button_cap': Button_Capacity,
+                                          '/ask_data_ps': Read_PS, '/button_ps': Button_PS})
 
 
     except:

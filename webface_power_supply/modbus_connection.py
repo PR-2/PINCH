@@ -4,7 +4,7 @@ from pymodbus.client.sync import ModbusSerialClient
 
 
 class Connection():
-    def __init__(self, indicator_list, coil_on_list, coil_off_list, command_list, port, method="rtu", timeout=1,
+    def __init__(self, indicator_list, coil_on_list, coil_off_list, command_list, port, method="rtu", timeout=0.1,
                  unit=0x01):
         self.unit = unit
         self.indicator_list = indicator_list
@@ -19,10 +19,10 @@ class Connection():
         self.lock.acquire()
         self.client.connect()
 
+
 # input registers
         if command.split("_")[0] == "IReg":
             rr = self.client.read_input_registers(self.indicator_list[command.split()[0]], 1, unit=self.unit)
-
             self.client.close()
             self.lock.release()
             return rr.getRegister(0)
@@ -35,19 +35,20 @@ class Connection():
             elif command.split()[0] in self.coil_off_list:
                 wr = self.client.write_coil(self.coil_off_list[command.split()[0]], 0, unit=self.unit)
                 rr = self.client.read_coils(self.coil_off_list[command.split()[0]], 1, unit=self.unit)
-
             self.client.close()
             self.lock.release()
             return rr.getBit(0)
 
 # holding registers
         elif command.split("_")[0] == "HReg":
-          #  print command
+
             if len(command.split()) > 1 and command.split()[1].isdigit():
-                wr = self.client.write_registers(self.command_list[command.split()[0]], [int(command.split()[1])], unit=10)
-            rr = self.client.read_holding_registers(self.command_list[command.split()[0]], 1, unit=10)
+                wr = self.client.write_registers(self.command_list[command.split()[0]], [int(command.split()[1])],
+                                                 unit=self.unit)
+            rr = self.client.read_holding_registers(self.command_list[command.split()[0]], 1, unit=self.unit)
             self.client.close()
             self.lock.release()
+
             return rr.getRegister(0)
 
         else:

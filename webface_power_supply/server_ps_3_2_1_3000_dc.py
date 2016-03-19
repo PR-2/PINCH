@@ -2,12 +2,12 @@ from modbus_connection import Connection as Tr
 from standart_server import initialize
 from standart_server import start
 from standart_server import stop
-from apel_m_5pdc_800_2 import *
+from ps_3_2_1_3000_dc import *
 
 
-tr = Tr(indicator_list,coil_on_list,coil_off_list,command_list,"/dev/ttyUSB1")
+tr = Tr(indicator_list, coil_on_list, coil_off_list, command_list, "/dev/ttyUSB2")
 
-path = "/tmp/python_unix_sockets_example"
+path = "/tmp/python_unix_sockets_ps_3_2_1_3000"
 server = initialize(path)
 
 

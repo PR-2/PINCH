@@ -11,7 +11,8 @@ socket = io.connect('/'+socket_ask_name,{
 });
 
 socket.on(socket_ask_name, function(data) {
-    document.getElementById(data.datagram.split(" ")[0]).innerHTML = data.datagram;
+    $("p#"+data.datagram.split(" ")[0]).text(data.datagram);
+   // document.getElementById(data.datagram.split(" ")[0]).innerHTML = data.datagram;
     document.getElementById("value").innerHTML = data.datagram.split(" ")[0];
 
 

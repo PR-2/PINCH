@@ -33,6 +33,7 @@ def start(server, read_device_function):
                     answer = read_device_function(data)
 
                     values[data.split()[0]] = str(answer)
+                  #  print data + " " + str(answer)
 
                     connection.sendall(data + " " + str(answer))
                 else:
