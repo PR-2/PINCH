@@ -2,10 +2,10 @@ from modbus_connection import Connection as Tr
 from standart_server import initialize
 from standart_server import start
 from standart_server import stop
-from capacity_changer import *
+from translate_apel_m_5pdc_800_2 import *
 
 
-tr = Tr(indicator_list,coil_on_list,coil_off_list,command_list,"/dev/ttyUSB0")
+tr = Tr(indicator_list,coil_on_list,coil_off_list,command_list,"/dev/ttyUSB1")
 
 path = "/tmp/python_unix_sockets_example"
 server = initialize(path)
