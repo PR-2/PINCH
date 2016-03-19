@@ -50,6 +50,7 @@ class Connection():
             return rr.getRegister(0)
 
         else:
-            return "Not correct command"
             print "Not correct command"
             self.lock.release()
+            return "Not correct command"
+
