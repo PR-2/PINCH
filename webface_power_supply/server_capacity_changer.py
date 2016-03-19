@@ -5,7 +5,7 @@ from standart_server import stop
 from capacity_changer import *
 
 
-tr = Tr(indicator_list,coil_on_list,coil_off_list,command_list,"/dev/ttyUSB0")
+tr = Tr(indicator_list,coil_on_list, coil_off_list,command_list, "/dev/ttyUSB0",unit=10)
 path = "/tmp/python_unix_sockets_capacity"
 server = initialize(path)
 
