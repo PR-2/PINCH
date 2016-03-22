@@ -2,7 +2,7 @@ import os
 import signal
 import subprocess
 
-p = subprocess.Popen(['ps', '-au'], stdout=subprocess.PIPE)
+p = subprocess.Popen(['ps', '-aux'], stdout=subprocess.PIPE)
 out, err = p.communicate()
 
 
