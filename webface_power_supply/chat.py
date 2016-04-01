@@ -28,6 +28,14 @@ def capacity_changer():
     return render_template('capacity_changer.html', indicator_list=indicator_list,
                            coil_list=coil_list, command_list=command_list)
 
+@app.route('/rrg')
+def rrg():
+    indicator_list = "RRG1 RRG2 RRG3 RRG4"
+    coil_list = ''
+    command_list = "Set_RRG1 Set_RRG2 Set_RRG3 Set_RRG4"
+
+    return render_template('rrg.html', indicator_list=indicator_list,
+                           coil_list=coil_list, command_list=command_list)
 
 @app.route('/')
 def rooms():
@@ -110,6 +118,11 @@ class Read_Capacity(Read_data):
     socket_name = "/tmp/python_unix_sockets_capacity"
     emit_path = 'ask_data_cap'
 
+class Read_Rrg(Read_data):
+    command_list = "RRG1 RRG2 RRG3 RRG4"
+    socket_name = "/tmp/python_unix_sockets_rrg"
+    emit_path = 'ask_data_rrg'
+
 class Read_PS(Read_data):
     command_list = "HReg_OutputVoltage HReg_OutputCurrent HReg_Temperature "
     socket_name = "/tmp/python_unix_sockets_ps_3_2_1_3000"
@@ -117,7 +130,7 @@ class Read_PS(Read_data):
 
 
 class Read_Gauge(Read_data):
-    command_list = "Gauge#1 Gauge#2"
+    command_list = "Gauge1 Gauge2"
     socket_name = "/tmp/python_unix_sockets_gauge"
     emit_path = 'ask_gauge'
 
@@ -143,10 +156,15 @@ class Button_Capacity(Button):
 
         self.emit('datagram', {'datagram': datagram})
 
+class Button_Rrg(Button):
+    def on_click_event(self, msg):
+        datagram = connect_to_server("/tmp/python_unix_sockets_rrg", "./log.txt", msg)
+
+        self.emit('datagram', {'datagram': datagram})
+
 class Button_PS(Button):
     def on_click_event(self, msg):
         datagram = connect_to_server("/tmp/python_unix_sockets_ps_3_2_1_3000", "./log.txt", msg)
-
 
         self.emit('datagram', {'datagram': datagram})
 
@@ -156,6 +174,7 @@ def socketio(remaining):
     try:
         socketio_manage(request.environ, {'/ask_data': Read_data, '/button': Button, '/ask_gauge': Read_Gauge,
                                           '/ask_data_cap': Read_Capacity, '/button_cap': Button_Capacity,
+                                          '/ask_data_rrg': Read_Rrg, '/button_rrg': Button_Rrg,
                                           '/ask_data_ps': Read_PS, '/button_ps': Button_PS})
 
 

@@ -18,8 +18,8 @@ def read_device_function(data):
 
     line = ""
     gauges = {
-        "Gauge#1": 0,
-        "Gauge#2": 1}
+        "Gauge1": 0,
+        "Gauge2": 1}
 
     sensor = ps[gauges[data.split()[0]]]
 

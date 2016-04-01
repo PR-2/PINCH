@@ -27,13 +27,13 @@ def start(server, read_device_function):
             try:
 
                 data = connection.recv(256)
+                print data
 
                 if ("_ask " not in data):
 
                     answer = read_device_function(data)
 
                     values[data.split()[0]] = str(answer)
-                  #  print data + " " + str(answer)
 
                     connection.sendall(data + " " + str(answer))
                 else:
@@ -41,6 +41,7 @@ def start(server, read_device_function):
                     for name, value in values.iteritems():
 
                         if data[:-7] == name:
+                            print name + " = " + value
                             connection.sendall(name + " = " + value)
 
                 connection.close()
