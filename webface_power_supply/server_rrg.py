@@ -27,7 +27,7 @@ def read_device_function(data):
             answer = str(gas.write(device, int(data.split()[1])))
     else:
         device = rrg[int(data[3]) - 1]
-        answer = str(gas.read(device))
+        answer = "{:.2f}".format(gas.read(device))
     print answer
 
     return answer

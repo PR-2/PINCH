@@ -95,7 +95,7 @@ class Read_data(BaseNamespace, BroadcastMixin):
                       #  print datagram
                         self.emit(self.emit_path, {'datagram': datagram})
 
-                    gevent.sleep(1)
+                    gevent.sleep(0.01)
                 except:
                     break
 

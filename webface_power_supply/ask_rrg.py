@@ -8,4 +8,4 @@ while True:
     for command in command_list.split(","):
         msg = command + " = "
         datagram = connect_to_server("/tmp/python_unix_sockets_rrg", None, msg)
-        gevent.sleep(0.1)
+        gevent.sleep(0.01)
