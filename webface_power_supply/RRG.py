@@ -9,14 +9,14 @@ class RRG():
     def readAll(self):
         gasFlows = []
         for rrg in self.RRGs:
-            gasFlows.append(50*self.Arduino.AI(rrg['output'], self.unitID)/5)
+            gasFlows.append(100*self.Arduino.AI(rrg['output'], self.unitID)/10.)
         return gasFlows
 
     def read(self, rrg):
-        return 50*self.Arduino.AI(rrg['output'], self.unitID)/5
+        return 100*self.Arduino.AI(rrg['output'], self.unitID)/10.
 
     def write(self, rrg, gasFlow):
-        return self.Arduino.AO(rrg['input'], (5*gasFlow/50), self.unitID)
+        return self.Arduino.AO(rrg['input'], (5*gasFlow/100.), self.unitID)
 
     def gateMode(self, mode):
         return 0

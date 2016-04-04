@@ -23,8 +23,9 @@ def read_device_function(data):
     answer = "No data"
     if "Set_" in data:
         device = rrg[int(data.split("_")[1][3]) - 1]
-        if len(data.split()) > 1 and data.split()[1].isdigit():
-            answer = str(gas.write(device, int(data.split()[1])))
+        if len(data.split()) > 1:
+            answer = str(gas.write(device, float(data.split()[1])))
+
     else:
         device = rrg[int(data[3]) - 1]
         answer = "{:.2f}".format(gas.read(device))
