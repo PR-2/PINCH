@@ -45,12 +45,14 @@
         <td style="text-align:center;">
             {% for name in coil_list.split() %}
 
+            <div id = {{name}} class="led-yellow"></div>
 
-             <button id={{ name }}>{{ name }}</button>
 
-            {% if loop.index % 2  == 0 %}
+             <button value="1" id={{ name }}>  {{name+"On" }}</button>
+             <button value="0" id={{ name }}>  {{name+"Off" }}</button>
             <br>
-            {% endif %}
+            <br>
+            <br>
 
 
             {% endfor %}

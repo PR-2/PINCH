@@ -15,9 +15,13 @@ app.debug = True
 @app.route('/capacity_changer')
 def capacity_changer():
     indicator_list = "IReg_C1-value IReg_C2-value IReg_C-value IReg_Amplitude-mismatch IReg_Phase-mismatch"
-    coil_list = 'Coil_AutoResistanceSetupOn  Coil_AutoResistanceSetupOff Coil_AutoReturnOn  Coil_AutoReturnOff ' \
-                'Coil_EEPROM-writeOn  Coil_EEPROM-writeOff ' \
-                'Coil_AutoPhaseSetupOn Coil_AutoPhaseSetupOff Coil_EngineOn Coil_EngineOff'
+   # coil_list = 'Coil_AutoResistanceSetupOn  Coil_AutoResistanceSetupOff Coil_AutoReturnOn  Coil_AutoReturnOff ' \
+   #             'Coil_EEPROM-writeOn  Coil_EEPROM-writeOff ' \
+   #             'Coil_AutoPhaseSetupOn Coil_AutoPhaseSetupOff Coil_EngineOn Coil_EngineOff'
+
+    coil_list = 'Coil_AutoResistanceSetup Coil_AutoReturn ' \
+                'Coil_EEPROM-write ' \
+                'Coil_AutoPhaseSetup Coil_Engine'
 
     command_list = "HReg_Min-C2-capacity HReg_ResistanceTuningSensitivity HReg_C-min-limit " \
                    "HReg_PhaseTuningSensitivity HReg_Max-C1-capacity HReg_InstallationAmplitudeSensorZero " \
@@ -92,7 +96,7 @@ class Read_data(BaseNamespace, BroadcastMixin):
                         msg = command + "_ask" + " = "
                        # print msg
                         datagram = connect_to_server(self.socket_name, None, msg)
-                      #  print datagram
+                        #print datagram
                         self.emit(self.emit_path, {'datagram': datagram})
 
                     gevent.sleep(0.01)

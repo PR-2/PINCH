@@ -35,9 +35,11 @@ class Connection():
             elif command.split()[0] in self.coil_off_list:
                 wr = self.client.write_coil(self.coil_off_list[command.split()[0]], 0, unit=self.unit)
                 rr = self.client.read_coils(self.coil_off_list[command.split()[0]], 1, unit=self.unit)
+
             self.client.close()
             self.lock.release()
             return rr.getBit(0)
+
 
 # holding registers
         elif command.split("_")[0] == "HReg":

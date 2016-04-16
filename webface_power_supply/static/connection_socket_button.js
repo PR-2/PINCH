@@ -10,12 +10,23 @@ $(function () {
 });
 
     $('[id^=Coil]').click(function () {
-      socket_button.emit('click event',  $(this).attr('id') );
+
+        if ($(this).attr('value') == 1)
+            {
+            document.getElementById($(this).attr("id")).className="led-green";
+            socket_button.emit('click event',  $(this).attr("id")+"On");
+            }
+        if ($(this).attr('value') == 0)
+            {
+            document.getElementById($(this).attr("id")).className="led-red";
+            socket_button.emit('click event',  $(this).attr("id")+"Off");
+            }
     });
 
 
     socket_button.on('datagram', function(data) {
         document.getElementById("datagram").innerHTML = data.datagram;
+
     });
 
 
