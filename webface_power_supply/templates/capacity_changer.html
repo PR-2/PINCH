@@ -26,24 +26,39 @@
         <p style="display:inline" id="datagram"></p>
     </div>
     <table>
+        <tr>
         <td>
             {% for name in command_list.split() %}
             <form id={{"Send_"+name}}>
                 <input id={{name}}>
                 <button id='button'>{{name}}</button>
             </form>
-            <br>
+
             {% endfor %}
         </td>
         <td>
             {% for name in indicator_list.split() %}
             <p id={{ name }}> {{ name }} = </p>
             {% endfor %}
+
         </td>
+        <td style="text-align:center;">
+            {% for name in coil_list.split() %}
+
+
+             <button id={{ name }}>{{ name }}</button>
+
+            {% if loop.index % 2  == 0 %}
+            <br>
+            {% endif %}
+
+
+            {% endfor %}
+            <iframe src="/rrg" width="500" height="300"></iframe>
+        </td>
+        </tr>
     </table>
-    {% for name in coil_list.split() %}
-    <button id={{ name }}>{{ name }}</button>
-    {% endfor %}
+
 </div>
 </body>
 </html>

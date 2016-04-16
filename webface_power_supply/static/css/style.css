@@ -22,6 +22,10 @@ body {
   
 }
 
+td {
+    vertical-align: top; /* Выравнивание по верхнему краю ячеек */
+   }
+
 button {border-width:6px;font-family: "Orbitron";} /* Border width */
 
 
