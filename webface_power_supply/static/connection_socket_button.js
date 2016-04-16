@@ -13,19 +13,32 @@ $(function () {
 
         if ($(this).attr('value') == 1)
             {
-            document.getElementById($(this).attr("id")).className="led-green";
             socket_button.emit('click event',  $(this).attr("id")+"On");
             }
         if ($(this).attr('value') == 0)
             {
-            document.getElementById($(this).attr("id")).className="led-red";
             socket_button.emit('click event',  $(this).attr("id")+"Off");
             }
     });
 
 
     socket_button.on('datagram', function(data) {
-        document.getElementById("datagram").innerHTML = data.datagram;
+
+    document.getElementById("datagram").innerHTML = data.datagram;
+
+   if (data.datagram.split(" ")[1] == "True"){
+
+    document.getElementById(data.datagram.split(" ")[0].replace(/Off$/,"").replace(/On$/,"")).className="led-green";
+    }
+    else if (data.datagram.split(" ")[1] == "False")
+    {
+    document.getElementById(data.datagram.split(" ")[0].replace(/Off$/,"").replace(/On$/,"")).className="led-red";
+    }
+    else
+    {
+    alert("Что-то пошло не так =(");
+    }
+
 
     });
 
