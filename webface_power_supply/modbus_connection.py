@@ -1,15 +1,15 @@
 import threading
-
 from pymodbus.client.sync import ModbusSerialClient
 
 
 class Connection():
-    def __init__(self, indicator_list, coil_on_list, coil_off_list, command_list, port, method="rtu", timeout=0.1,
-                 unit=0x01):
+    def __init__(self, indicator_list, coil_on_list, coil_off_list, command_list, coil_list, port,
+                 method="rtu", timeout=0.1, unit=0x01):
         self.unit = unit
         self.indicator_list = indicator_list
         self.coil_on_list = coil_on_list
         self.coil_off_list = coil_off_list
+        self.coil_list = coil_list
         self.command_list = command_list
         self.lock = threading.Lock()
         self.client = ModbusSerialClient(method=method, port=port, baudrate=19200, stopbits=1, bytesize=8,
@@ -35,6 +35,11 @@ class Connection():
             elif command.split()[0] in self.coil_off_list:
                 wr = self.client.write_coil(self.coil_off_list[command.split()[0]], 0, unit=self.unit)
                 rr = self.client.read_coils(self.coil_off_list[command.split()[0]], 1, unit=self.unit)
+            elif command.split()[0] in self.coil_list and len(command.split()) > 1 and \
+                    command.split()[1].isdigit():
+                wr = self.client.write_coil(self.coil_list[command.split()[0]], int(command.split()[1]),
+                                            unit=self.unit)
+                rr = self.client.read_coils(self.coil_list[command.split()[0]], 1, unit=self.unit)
 
             self.client.close()
             self.lock.release()

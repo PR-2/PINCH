@@ -5,6 +5,12 @@ indicator_list = {"IReg_C-value": 1023,
                   "IReg_Amplitude-mismatch": 1034,
                   }
 
+coil_list = {"Coil_AutoPhaseSetup": 999,
+             "Coil_AutoResistanceSetup": 1000,
+             "Coil_EEPROM-write": 10001,
+             "Coil_Engine": 1002,
+             "Coil_AutoReturn": 1003}
+
 coil_on_list = {"Coil_AutoPhaseSetupOn": 999,
                 "Coil_AutoResistanceSetupOn": 1000,
                 "Coil_EEPROM-writeOn": 10001,

@@ -1,4 +1,5 @@
 indicator_list = {}
+coil_list = {}
 coil_on_list = {}
 coil_off_list = {}
 command_list = {"HReg_SetStatus": 0x00,

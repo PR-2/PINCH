@@ -13,11 +13,13 @@ $(function () {
 
         if ($(this).attr('value') == 1)
             {
-            socket_button.emit('click event',  $(this).attr("id")+"On");
+          //  socket_button.emit('click event',  $(this).attr("id")+"On");
+          socket_button.emit('click event',  $(this).attr("id")+" 1");
             }
         if ($(this).attr('value') == 0)
             {
-            socket_button.emit('click event',  $(this).attr("id")+"Off");
+         //   socket_button.emit('click event',  $(this).attr("id")+"Off");
+            socket_button.emit('click event',  $(this).attr("id")+" 0");
             }
     });
 
@@ -26,11 +28,11 @@ $(function () {
 
     document.getElementById("datagram").innerHTML = data.datagram;
 
-   if (data.datagram.split(" ")[1] == "True"){
+   if (data.datagram.indexOf("True") > -1 ){
 
     document.getElementById(data.datagram.split(" ")[0].replace(/Off$/,"").replace(/On$/,"")).className="led-green";
     }
-    else if (data.datagram.split(" ")[1] == "False")
+    else if (data.datagram.indexOf("False") > -1)
     {
     document.getElementById(data.datagram.split(" ")[0].replace(/Off$/,"").replace(/On$/,"")).className="led-red";
     }
