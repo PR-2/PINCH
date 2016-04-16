@@ -3,7 +3,7 @@ from standart_server import initialize
 from standart_server import start
 from standart_server import stop
 
-port = "/dev/ttyUSB0"
+port = "/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0"
 
 RRG1 = {'input': 3, 'output': 0}
 RRG2 = {'input': 5, 'output': 1}
