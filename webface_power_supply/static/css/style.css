@@ -31,9 +31,9 @@ button {border-width:6px;font-family: "Orbitron";} /* Border width */
 
 
 .led-red {
-    align:left;
-   /* margin: 20px auto; 8 */
-    padding:-5px 0 0 0
+    margin:0 auto;
+    margin-bottom:5px;
+    padding:5px;
     width: 12px;
     height: 12px;
     background-color: #940;
@@ -42,9 +42,10 @@ button {border-width:6px;font-family: "Orbitron";} /* Border width */
 }
 
 .led-yellow {
-    align:left;
-   /* margin: 20px auto; 8 */
-    padding:-5px 0 0 0
+    margin:0 auto;
+    margin-bottom:5px;
+    align:"center";
+    padding:5px;
     width: 12px;
     height: 12px;
     background-color: #A90;
@@ -53,9 +54,9 @@ button {border-width:6px;font-family: "Orbitron";} /* Border width */
 }
 
 .led-green {
-     align:left;
-   /* margin: 20px auto; 8 */
-    padding:-5px 0 0 0
+    margin:0 auto;
+    margin-bottom:5px;
+    padding:5px;
     width: 12px;
     height: 12px;
     background-color: #690;

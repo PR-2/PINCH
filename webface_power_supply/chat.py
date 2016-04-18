@@ -44,8 +44,10 @@ def rrg():
 @app.route('/')
 def rooms():
     indicator_list = "IReg_State IReg_Voltage IReg_Current IReg_Power IReg_Sec IReg_Min IReg_Hour"
-    coil_list = 'Coil_ON Coil_OFF Coil_StTimerON Coil_StTimerOFF Coil_RstTimer Coil_IgnOn Coil_IgnOff ' \
-                'Coil_OutSwitch_A Coil_OutSwitch_B'
+   # coil_list = 'Coil_ON Coil_OFF Coil_StTimerON Coil_StTimerOFF Coil_RstTimer Coil_IgnOn Coil_IgnOff ' \
+   #             'Coil_OutSwitch_A Coil_OutSwitch_B'
+    coil_list = "Coil Coil_StTimer Coil_RstTimer Coil_Ign Coil_OutSwitch_AorB"
+
     command_list = "HReg_StabMode HReg_Voltage HReg_Current HReg_Power HReg_Mode HReg_Freq HReg_DCyo " \
                    "HReg_Sec Send_HReg_Min HReg_Hour HReg_RemCtrl HReg_ArcCnt"
 
