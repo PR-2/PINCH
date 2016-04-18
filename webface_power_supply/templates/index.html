@@ -44,6 +44,7 @@
         </td>
     </table>
     {% for name in coil_list.split() %}
+    <div id = {{name}} class="led-yellow"></div>
     <button id={{ name }}>{{ name }}</button>
     {% endfor %}
 </div>

@@ -28,8 +28,8 @@ $(function () {
 
     document.getElementById("datagram").innerHTML = data.datagram;
 
-   if (data.datagram.indexOf("True") > -1 ){
-
+   if (data.datagram.indexOf("True") > -1 )
+    {
     document.getElementById(data.datagram.split(" ")[0].replace(/Off$/,"").replace(/On$/,"")).className="led-green";
     }
     else if (data.datagram.indexOf("False") > -1)
@@ -38,7 +38,7 @@ $(function () {
     }
     else
     {
-    alert("Что-то пошло не так =(");
+
     }
 
 

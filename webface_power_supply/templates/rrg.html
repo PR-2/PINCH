@@ -28,20 +28,24 @@
     <table>
         <td>
             {% for name in command_list.split() %}
+            <div id = {{name}} class="led-yellow"></div>
             <form id={{"Send_"+name}}>
                 <input id={{name}}>
                 <button id='button'>{{name}}</button>
+
             </form>
 
             {% endfor %}
         </td>
         <td>
             {% for name in indicator_list.split() %}
+
             <p id={{ name }}> {{ name }} = </p>
             {% endfor %}
         </td>
     </table>
     {% for name in coil_list.split() %}
+
     <button id={{ name }}>{{ name }}</button>
     {% endfor %}
 </div>
