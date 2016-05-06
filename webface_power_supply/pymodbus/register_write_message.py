@@ -318,8 +318,13 @@ class ReadCitoRes(ModbusResponse):
         return struct.pack('>HH', self.address, self.value)
 
     def decode(self,data):
-
-        self.value, = struct.unpack('>' + str(len(data)) + 's', data)
+        print len(data)
+        print data + "!!!"
+        if len(data) == 5:
+            print str(struct.unpack('>bI', data))
+            self.value = str(struct.unpack('>bI', data)[1]/1000.)
+        else:
+            self.value, = struct.unpack('>' + str(len(data)) + 's', data)
 
     def __str__(self):
         ''' Returns a string representation of the instance
@@ -330,6 +335,53 @@ class ReadCitoRes(ModbusResponse):
         return "WriteRegisterResponse %d => %d" % params
 
 
+#-----------------------------------------------------------------------#
+class WriteCitoReq(WriteSingleRegisterRequest):
+    function_code = 0x42
+
+    def encode(self):
+        ''' Encode a write single register packet packet request
+
+        :returns: The encoded packet
+        '''
+        if self.skip_encode:
+            return self.value
+        return struct.pack('>HI', self.address, self.value)
+
+    def decode(self, data):
+        ''' Decode a write single register packet packet request
+
+        :param data: The request to decode
+        '''
+        self.address, self.value = struct.unpack('>HI', data)
+
+
+    def execute(self, context):
+        ''' Run a write single register request against a datastore
+
+        :param context: The datastore to request from
+        :returns: An initialized response, exception message otherwise
+        '''
+        if not (0 <= self.value <= 0xffffffff):
+            return self.doException(merror.IllegalValue)
+        if not context.validate(self.function_code, self.address, 1):
+            return self.doException(merror.IllegalAddress)
+
+        context.setValues(self.function_code, self.address, [self.value])
+        values = context.getValues(self.function_code, self.address, 1)
+        return WriteCitoRes(self.address, values[0])
+
+class WriteCitoRes(WriteSingleRegisterResponse):
+    function_code = 0x42
+
+    def decode(self, data):
+        ''' Decode a write single register packet packet request
+
+        :param data: The request to decode
+        '''
+        self.address, self.value = struct.unpack('>HI', data)
+
+
 #---------------------------------------------------------------------------#
 # Exported symbols
 #---------------------------------------------------------------------------#
@@ -337,4 +389,5 @@ __all__ = [
     "WriteSingleRegisterRequest", "WriteSingleRegisterResponse",
     "WriteMultipleRegistersRequest", "WriteMultipleRegistersResponse",
     "ReadCitoReq", "ReadCitoRes",
+    "WriteCitoReq", "WriteCitoRes",
 ]

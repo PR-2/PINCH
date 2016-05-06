@@ -174,6 +174,7 @@ class ClientDecoder(IModbusDecoder):
             ReadDeviceInformationResponse,
 
             ReadCitoRes,
+            WriteCitoRes,
     ]
     __sub_function_table = [
             ReturnQueryDataResponse,

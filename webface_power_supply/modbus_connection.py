@@ -19,7 +19,6 @@ class Connection():
         elif method == "tcp":
             self.client = ModbusTcpClient(host=port)
 
-
     def translate(self, command):
         self.lock.acquire()
         self.client.connect()
