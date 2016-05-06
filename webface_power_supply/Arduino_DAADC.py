@@ -45,7 +45,7 @@ class Arduino_DAADC():
         message  = str(unitID).zfill(3)
         message += 'AO'
         message += str(pinNO).zfill(2)
-        message += str(int(255*value/5)).zfill(4)
+        message += str(int(255*value/5.)).zfill(4)
         message += str(self.checksum(message)).zfill(3) + '\n'
         self.connection.write(message.encode())
         time.sleep(self.time2wait)

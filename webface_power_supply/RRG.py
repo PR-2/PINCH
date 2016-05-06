@@ -5,8 +5,9 @@ class RRG():
         self.unitID = unitID
         self.RRGs = RRGs
         self.Arduino = ard.Arduino_DAADC(serialPort)
-        for rrg in self.RRGs:
-            self.write(rrg, 0)
+#        for rrg in self.RRGs:
+#            self.write(rrg, 0)
+
 
     def readAll(self):
         gasFlows = []

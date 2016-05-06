@@ -1,5 +1,6 @@
 import threading
 from pymodbus.client.sync import ModbusSerialClient
+from pymodbus.client.sync import ModbusTcpClient
 
 
 class Connection():
@@ -12,8 +13,12 @@ class Connection():
         self.coil_list = coil_list
         self.command_list = command_list
         self.lock = threading.Lock()
-        self.client = ModbusSerialClient(method=method, port=port, baudrate=19200, stopbits=1, bytesize=8,
+        if method == "rtu":
+            self.client = ModbusSerialClient(method=method, port=port, baudrate=19200, stopbits=1, bytesize=8,
                                          timeout=timeout)
+        elif method == "tcp":
+            self.client = ModbusTcpClient(host=port)
+
 
     def translate(self, command):
         self.lock.acquire()

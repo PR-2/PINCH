@@ -228,10 +228,113 @@ class WriteMultipleRegistersResponse(ModbusResponse):
         params = (self.address, self.count)
         return "WriteMultipleRegisterResponse (%d,%d)" % params
 
+
+#---------------------------------------------------------------------------#
+class ReadCitoReq(ModbusRequest):
+    '''
+    This function code is used to write a single holding register in a
+    remote device.
+
+    The Request PDU specifies the address of the register to
+    be written. Registers are addressed starting at zero. Therefore register
+    numbered 1 is addressed as 0.
+    '''
+    function_code = 0x41
+    #_rtu_frame_size = 8
+
+    def __init__(self, address=None, value=None, **kwargs):
+        ''' Initializes a new instance
+
+        :param address: The address to start writing add
+        :param value: The values to write
+        '''
+        ModbusRequest.__init__(self, **kwargs)
+        self.address = address
+        self.value = value
+
+    def encode(self):
+        ''' Encode a write single register packet packet request
+
+        :returns: The encoded packet
+        '''
+
+        if self.skip_encode:
+            return self.value
+        return struct.pack('>HH', self.address, self.value)
+    def decode(self,data):
+        if len(data) == 7:
+            self.address, func_name, message_len, self.value = struct.unpack('>bbbI', data)
+        else:
+            self.address, func_name, message_len, self.value = struct.unpack('>bbb' + str(len(data) - 3) + 's',
+                                                                             data)
+
+    def execute(self, context):
+        ''' Run a write single register request against a datastore
+
+        :param context: The datastore to request from
+        :returns: An initialized response, exception message otherwise
+        '''
+        if not (0 <= self.value <= 0xffff):
+            return self.doException(merror.IllegalValue)
+        if not context.validate(self.function_code, self.address, 1):
+            return self.doException(merror.IllegalAddress)
+
+        context.setValues(self.function_code, self.address, [self.value])
+        values = context.getValues(self.function_code, self.address, 1)
+        return ReadCitoRes(self.address, values[0])
+
+    def __str__(self):
+        ''' Returns a string representation of the instance
+
+        :returns: A string representation of the instance
+        '''
+        return "WriteRegisterRequest %d => %d" % (self.address, self.value)
+
+
+class ReadCitoRes(ModbusResponse):
+    '''
+    The normal response is an echo of the request, returned after the
+    register contents have been written.
+    '''
+    function_code = 0x41
+   # _rtu_frame_size = 8
+
+    def __init__(self, address=None, value=None, **kwargs):
+        ''' Initializes a new instance
+
+        :param address: The address to start writing add
+        :param value: The values to write
+        '''
+        ModbusResponse.__init__(self, **kwargs)
+        self.address = address
+        self.value = value
+
+
+    def encode(self):
+        ''' Encode a write single register packet packet request
+
+        :returns: The encoded packet
+        '''
+        return struct.pack('>HH', self.address, self.value)
+
+    def decode(self,data):
+
+        self.value, = struct.unpack('>' + str(len(data)) + 's', data)
+
+    def __str__(self):
+        ''' Returns a string representation of the instance
+
+        :returns: A string representation of the instance
+        '''
+        params = (self.address, self.value)
+        return "WriteRegisterResponse %d => %d" % params
+
+
 #---------------------------------------------------------------------------#
 # Exported symbols
 #---------------------------------------------------------------------------#
 __all__ = [
     "WriteSingleRegisterRequest", "WriteSingleRegisterResponse",
     "WriteMultipleRegistersRequest", "WriteMultipleRegistersResponse",
+    "ReadCitoReq", "ReadCitoRes",
 ]
