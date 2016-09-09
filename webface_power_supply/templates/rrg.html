@@ -11,6 +11,7 @@
     <script>
         var socket_ask_name='ask_data_rrg';
         var socket_name = "button_rrg";
+
     </script>
     <script type="text/javascript" src="static/connection_socket_get.js"></script>
     <script type="text/javascript" src="static/connection_socket_button.js"></script>
@@ -43,11 +44,21 @@
             <p id={{ name }}> {{ name }} = </p>
             {% endfor %}
         </td>
-    </table>
-    {% for name in coil_list.split() %}
+        <td>
+       
+        {% for name in coil_list.split() %}
 
-    <button id={{ name }}>{{ name }}</button>
-    {% endfor %}
+    	<button value="2" id={{ "Coil_"+name }}>{{ name }}</button>
+
+    	{% if loop.index0 % 3 == 2 or loop.last %}
+     	 <br> 
+     	<!-- -->
+      	{% endif %}
+    	
+    	{% endfor %}
+        </td>
+    </table>
+    
 </div>
 </body>
 </html>

@@ -43,10 +43,15 @@
             {% endfor %}
         </td>
         <td style="text-align:center;">
-            {% for name in coil_list.split() %}
-             <div style = id = {{name}} class="led-yellow"></div>
-            <button value="1" id={{ name }}>  {{name+"On" }}</button>
+
+             {% for name in coil_list.split() %}
+
+            <div id = {{name}} class="led-yellow"></div>
+
+
+             <button value="1" id={{ name }}>  {{name+"On" }}</button>
              <button value="0" id={{ name }}>  {{name+"Off" }}</button>
+            <br>
 
     {% endfor %}
         </td>

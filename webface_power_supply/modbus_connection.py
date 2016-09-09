@@ -23,6 +23,9 @@ class Connection():
         self.lock.acquire()
         self.client.connect()
 
+        print self.client.connect()
+
+
 
 # input registers
         if command.split("_")[0] == "IReg":

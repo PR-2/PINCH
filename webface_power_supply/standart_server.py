@@ -32,9 +32,10 @@ def start(server, read_device_function):
                 if ("_ask " not in data):
 
                     answer = read_device_function(data)
+                    print answer
 
                     values[data.split()[0]] = str(answer)
-
+                    print values
                     connection.sendall(data + " " + str(answer))
                 else:
 

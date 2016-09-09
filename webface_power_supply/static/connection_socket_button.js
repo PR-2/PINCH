@@ -21,6 +21,11 @@ $(function () {
          //   socket_button.emit('click event',  $(this).attr("id")+"Off");
             socket_button.emit('click event',  $(this).attr("id")+" 0");
             }
+        else
+            {
+         //   socket_button.emit('click event',  $(this).attr("id")+"Off");
+            socket_button.emit('click event',  $(this).attr("id"));
+            }
     });
 
 

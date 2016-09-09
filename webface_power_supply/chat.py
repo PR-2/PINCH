@@ -32,10 +32,25 @@ def capacity_changer():
     return render_template('capacity_changer.html', indicator_list=indicator_list,
                            coil_list=coil_list, command_list=command_list)
 
+
+@app.route('/cito')
+def cito():
+    read_list = "RCMD_State  RCMD_Power_set_point RCMD_Frequency RCMD_Forward_power RCMD_Reflected_power RCMD_Load_power " \
+         "RCMD_CEX_frequency"
+
+    write_list = "WCMD_Command WCMD_Control_mode WCMD_Power_set_point WCMD_DC_bias_source " \
+                 "WCMD_DC_bias_set_point WCMD_Process_feedback_source WCMD_Process_set_point " \
+                 "WCMD_Process_feedback_max WCMD_Process_feedback_unit WCMD_Gain_factor " \
+                 "WCMD_Integral_action_factor"
+
+
+    return render_template('cito.html', read_list=read_list, write_list=write_list)
+
+
 @app.route('/rrg')
 def rrg():
     indicator_list = "RRG1 RRG2 RRG3 RRG4"
-    coil_list = ''
+    coil_list = 'open_RRG1 regulate_RRG1 close_RRG1 open_RRG2  regulate_RRG2 close_RRG2 open_RRG3 regulate_RRG3 close_RRG3 open_RRG4 regulate_RRG4 close_RRG4'
     command_list = "Set_RRG1 Set_RRG2 Set_RRG3 Set_RRG4"
 
     return render_template('rrg.html', indicator_list=indicator_list,
@@ -46,7 +61,7 @@ def rooms():
     indicator_list = "IReg_State IReg_Voltage IReg_Current IReg_Power IReg_Sec IReg_Min IReg_Hour"
    # coil_list = 'Coil_ON Coil_OFF Coil_StTimerON Coil_StTimerOFF Coil_RstTimer Coil_IgnOn Coil_IgnOff ' \
    #             'Coil_OutSwitch_A Coil_OutSwitch_B'
-    coil_list = "Coil Coil_StTimer Coil_RstTimer Coil_Ign Coil_OutSwitch_AorB"
+    coil_list = "Coil_ Coil_StTimer Coil_RstTimer Coil_Ign Coil_OutSwitch_AorB"
 
     command_list = "HReg_StabMode HReg_Voltage HReg_Current HReg_Power HReg_Mode HReg_Freq HReg_DCyo " \
                    "HReg_Sec Send_HReg_Min HReg_Hour HReg_RemCtrl HReg_ArcCnt"
@@ -118,6 +133,12 @@ class Read_data(BaseNamespace, BroadcastMixin):
         return True
 
 
+class Read_Cito(Read_data):
+    command_list = "RCMD_State RCMD_Power_set_point RCMD_Frequency RCMD_Forward_power RCMD_Reflected_power RCMD_Load_power " \
+         "RCMD_CEX_frequency"
+    socket_name = "/tmp/python_unix_sockets_cito"
+    emit_path = 'ask_data_cito'
+
 class Read_Capacity(Read_data):
     command_list = "IReg_C1-value IReg_C2-value IReg_C-value " \
                    "IReg_Amplitude-mismatch IReg_Phase-mismatch"
@@ -156,6 +177,13 @@ class Button(BaseNamespace, RoomsMixin, BroadcastMixin):
         self.emit('datagram', {'datagram': datagram})
 
 
+class Button_Cito(Button):
+    def on_click_event(self, msg):
+        datagram = connect_to_server("/tmp/python_unix_sockets_cito", "./log.txt", msg)
+
+        self.emit('datagram', {'datagram': datagram})
+
+
 class Button_Capacity(Button):
     def on_click_event(self, msg):
         datagram = connect_to_server("/tmp/python_unix_sockets_capacity", "./log.txt", msg)
@@ -181,7 +209,8 @@ def socketio(remaining):
         socketio_manage(request.environ, {'/ask_data': Read_data, '/button': Button, '/ask_gauge': Read_Gauge,
                                           '/ask_data_cap': Read_Capacity, '/button_cap': Button_Capacity,
                                           '/ask_data_rrg': Read_Rrg, '/button_rrg': Button_Rrg,
-                                          '/ask_data_ps': Read_PS, '/button_ps': Button_PS})
+                                          '/ask_data_ps': Read_PS, '/button_ps': Button_PS,
+                                          '/ask_data_cito': Read_Cito, '/button_cito': Button_Cito})
 
 
     except:

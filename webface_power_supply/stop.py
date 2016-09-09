@@ -23,6 +23,9 @@ for line in out.splitlines():
     stop(line, "ask_rrg.py")
     stop(line, "ask_power.py")
     stop(line, "server_capacity_changer.py")
-    stop(line, "ask_capacity_changer")
+    stop(line, "ask_capacity_changer.py")
     stop(line, "server_ps_3_2_1_3000_dc.py")
-    stop(line, "ask_ps_3_2_1_3000_dc")
+    stop(line, "ask_ps_3_2_1_3000_dc.py")
+    stop(line, "ask_cito.py")
+    stop(line, "server_cito_1330.py")
+

@@ -6,7 +6,7 @@ indicator_list = {"IReg_State": 0,
                   "IReg_Min": 6,
                   "IReg_Hour": 7}
 
-coil_list = {"Coil": 1,
+coil_list = {"Coil_": 1,
              "Coil_StTimer": 2,
              "Coil_RstTimer": 3,
              "Coil_Ign": 4,
